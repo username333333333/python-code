@@ -13,3 +13,4 @@ Werkzeug>=3.0.0
 pymysql>=1.1.0
 waitress>=2.1.2
 networkx>=3.2.1
+folium>=0.16.0
