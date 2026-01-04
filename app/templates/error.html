@@ -1,0 +1,43 @@
+<!-- app/templates/error.html -->
+{% extends "base.html" %}
+
+{% block title %}错误 - 天气数据分析系统{% endblock %}
+
+{% block styles %}
+<style>
+    .error-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .error-actions {
+        margin-top: 1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <h2 class="text-danger mb-4">系统错误</h2>
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    {% if details %}
+    <div class="alert alert-warning">
+        <h5>详细错误信息：</h5>
+        <pre class="bg-light p-3 rounded">{{ details }}</pre>
+    </div>
+    {% endif %}
+    <div class="error-actions">
+        <a href="{{ url_for('visualizations.index') }}" class="btn btn-primary">
+            返回首页
+        </a>
+        <button onclick="history.back()" class="btn btn-outline-secondary ms-2">
+            返回上一页
+        </button>
+    </div>
+</div>
+{% endblock %}

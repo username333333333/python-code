@@ -1,0 +1,517 @@
+{% extends "base.html" %}
+
+{% block title %}路径优化{% endblock %}
+
+{% block styles %}
+<style>
+    #map-container {
+        height: 600px;
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .itinerary-card {
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+        overflow: visible;
+        word-wrap: break-word;
+        min-height: auto;
+    }
+
+    .itinerary-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+        overflow: visible;
+    }
+
+    .attraction-item {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        background: #f8f9fa;
+        border-radius: 4px;
+        word-wrap: break-word;
+    }
+
+    .day-badge {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .loading {
+        display: none;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .attraction-item {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        background: #f8f9fa;
+        border-radius: 4px;
+    }
+
+    .attraction-item:hover {
+        background: #e9ecef;
+    }
+
+    /* 行程卡片样式，确保全宽显示 */
+    #itinerary-result {
+        display: block;
+    }
+
+    #itinerary-result .itinerary-card {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .btn-primary:hover {
+        background-color: #0b5ed7;
+        border-color: #0a58ca;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    label {
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-4">
+    <h1 class="mb-4">辽宁省智慧旅游路径优化</h1>
+
+    <div class="row">
+        <!-- 左侧控制面板 -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">路径设置</h5>
+                </div>
+                <div class="card-body">
+                    <form id="path-form">
+                        <div class="form-group">
+                            <label for="start-city">起点城市</label>
+                            <select id="start-city" class="form-select">
+                                <option value="沈阳">沈阳</option>
+                                <option value="大连">大连</option>
+                                <option value="丹东">丹东</option>
+                                <option value="鞍山">鞍山</option>
+                                <option value="抚顺">抚顺</option>
+                                <option value="本溪">本溪</option>
+                                <option value="锦州">锦州</option>
+                                <option value="营口">营口</option>
+                                <option value="阜新">阜新</option>
+                                <option value="辽阳">辽阳</option>
+                                <option value="盘锦">盘锦</option>
+                                <option value="铁岭">铁岭</option>
+                                <option value="朝阳">朝阳</option>
+                                <option value="葫芦岛">葫芦岛</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="target-city">目标城市</label>
+                            <select id="target-city" class="form-select">
+                                <option value="沈阳">沈阳</option>
+                                <option value="大连">大连</option>
+                                <option value="丹东">丹东</option>
+                                <option value="鞍山">鞍山</option>
+                                <option value="抚顺">抚顺</option>
+                                <option value="本溪">本溪</option>
+                                <option value="锦州">锦州</option>
+                                <option value="营口">营口</option>
+                                <option value="阜新">阜新</option>
+                                <option value="辽阳">辽阳</option>
+                                <option value="盘锦">盘锦</option>
+                                <option value="铁岭">铁岭</option>
+                                <option value="朝阳">朝阳</option>
+                                <option value="葫芦岛">葫芦岛</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="days">旅行天数</label>
+                            <input type="number" id="days" class="form-control" min="1" max="7" value="3">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="attraction-types">景点类型偏好</label>
+                            <select id="attraction-types" class="form-select" multiple>
+                                <option value="博物馆" selected>博物馆</option>
+                                <option value="公园" selected>公园</option>
+                                <option value="风景区" selected>风景区</option>
+                                <option value="历史古迹">历史古迹</option>
+                                <option value="自然景观">自然景观</option>
+                                <option value="人文景观">人文景观</option>
+                                <option value="主题公园">主题公园</option>
+                                <option value="温泉">温泉</option>
+                                <option value="海滨">海滨</option>
+                            </select>
+                            <small class="form-text text-muted">按住Ctrl键可多选</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="min-rating">最低评分</label>
+                            <input type="range" id="min-rating" class="form-range" min="0" max="5" step="0.5" value="4">
+                            <div class="d-flex justify-content-between">
+                                <span>0</span>
+                                <span><span id="rating-value">4.0</span></span>
+                                <span>5</span>
+                            </div>
+                        </div>
+
+                        <button type="button" id="generate-path-btn" class="btn btn-primary w-100">
+                            <i class="bi bi-route"></i> 生成闭环路径
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧结果展示 -->
+        <div class="col-md-8">
+            <!-- 加载状态 -->
+            <div class="loading" id="loading">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">加载中...</span>
+                </div>
+                <p class="mt-2">正在生成最优路径...</p>
+            </div>
+
+            <!-- 地图展示 -->
+            <div class="card mb-4" id="map-card" style="display: none;">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">路径地图</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div id="map-container"></div>
+                </div>
+            </div>
+
+            <!-- 行程结果 -->
+            <div id="itinerary-result" style="display: none;"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 评分滑块事件
+    const minRatingSlider = document.getElementById('min-rating');
+    const ratingValue = document.getElementById('rating-value');
+    minRatingSlider.addEventListener('input', function (e) {
+        ratingValue.textContent = e.target.value;
+    });
+
+    // 生成路径按钮事件
+    const generateBtn = document.getElementById('generate-path-btn');
+    generateBtn.addEventListener('click', function () {
+        console.log('生成路径按钮被点击');
+        generatePath();
+    });
+
+    // 生成路径函数
+    function generatePath() {
+        // 显示加载状态
+        document.getElementById('loading').style.display = 'block';
+        document.getElementById('map-card').style.display = 'none';
+        document.getElementById('itinerary-result').style.display = 'none';
+
+        // 获取表单数据
+        const startCity = document.getElementById('start-city').value;
+        const targetCity = document.getElementById('target-city').value;
+        const days = parseInt(document.getElementById('days').value);
+        const attractionTypes = Array.from(document.getElementById('attraction-types').selectedOptions)
+            .map(option => option.value);
+        const minRating = parseFloat(document.getElementById('min-rating').value);
+
+        // 构建请求数据
+        const data = {
+            start_city: startCity,
+            target_city: targetCity,
+            days: days,
+            preferences: {
+                attraction_types: attractionTypes,
+                min_rating: minRating
+            }
+        };
+
+        console.log('发送请求数据:', data);
+
+        // 发送请求
+        fetch('/path/optimize', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(function (response) {
+                console.log('响应状态:', response.status);
+                return response.text();
+            })
+            .then(function (responseText) {
+                console.log('响应文本:', responseText);
+                return JSON.parse(responseText);
+            })
+            .then(function (result) {
+                console.log('响应结果:', result);
+                if (result.success) {
+                    // 显示结果
+                    displayItinerary(result.itinerary);
+                    generateMap(result.itinerary, result.start_city, result.target_city);
+                } else {
+                    alert('路径生成失败: ' + result.message);
+                }
+            })
+            .catch(function (error) {
+                console.error('生成路径时出错:', error);
+                alert('生成路径时出错: ' + error.message);
+            })
+            .finally(function () {
+                // 隐藏加载状态
+                document.getElementById('loading').style.display = 'none';
+            });
+    }
+
+    // 显示行程
+    function displayItinerary(itinerary) {
+        const container = document.getElementById('itinerary-result');
+        container.innerHTML = '';
+
+        if (!itinerary || itinerary.length === 0) {
+            container.innerHTML = '<p class="text-center text-muted">暂无行程数据</p>';
+            container.style.display = 'block';
+            return;
+        }
+
+        // 确定起点城市和目标城市
+        let startCity = '';
+        let targetCity = '';
+
+        // 从第一天的第一个景点获取起点城市
+        if (itinerary[0] && itinerary[0].attractions.length > 0) {
+            startCity = itinerary[0].attractions[0].city;
+        }
+
+        // 从第一天的第二个景点或其他景点获取目标城市
+        for (let i = 0; i < itinerary.length; i++) {
+            const dayPlan = itinerary[i];
+            for (let j = 0; j < dayPlan.attractions.length; j++) {
+                const attraction = dayPlan.attractions[j];
+                if (attraction.city !== startCity) {
+                    targetCity = attraction.city;
+                    break;
+                }
+            }
+            if (targetCity) break;
+        }
+
+        // 如果找不到目标城市，使用起点城市
+        if (!targetCity) {
+            targetCity = startCity;
+        }
+
+        console.log('起点城市:', startCity, '目标城市:', targetCity);
+
+        for (let i = 0; i < itinerary.length; i++) {
+            const dayPlan = itinerary[i];
+            const card = document.createElement('div');
+            card.className = 'card itinerary-card';
+
+            const dayNum = dayPlan.day;
+            const dayColors = ['blue', 'green', 'red', 'purple', 'orange', 'darkred', 'indigo'];
+            const dayColor = dayColors[(dayNum - 1) % dayColors.length];
+
+            // 构建天气信息
+            let weatherHtml = '';
+            if (dayPlan.weather) {
+                weatherHtml = '<span class="weather-info">' + dayPlan.weather.weather + '，' + dayPlan.weather.temperature + '</span>';
+            }
+
+            // 构建景点列表
+            let attractionsHtml = '';
+            if (dayPlan.attractions.length > 0) {
+                // 只显示目标城市的景点，除非起点和终点一样
+                const targetCityAttractions = [];
+
+                for (let j = 0; j < dayPlan.attractions.length; j++) {
+                    const attractionInfo = dayPlan.attractions[j];
+                    // 只有当起点城市和目标城市相同时，才显示所有景点
+                    // 否则只显示目标城市的景点
+                    if (startCity === targetCity || attractionInfo.city === targetCity) {
+                        targetCityAttractions.push(attractionInfo);
+                    }
+                }
+
+                if (targetCityAttractions.length > 0) {
+                    for (let j = 0; j < targetCityAttractions.length; j++) {
+                        const attraction = targetCityAttractions[j];
+                        const rating = attraction.rating || '暂无评分';
+                        const price = attraction.price || 0;
+                        const visitTime = attraction.visit_time || '';
+                        const travelInfo = attraction.travel_info;
+
+                        attractionsHtml += '<div class="attraction-item">';
+                        attractionsHtml += '<div class="d-flex justify-content-between">';
+                        attractionsHtml += '<strong>' + (j + 1) + '. ' + attraction.name + '</strong>';
+                        attractionsHtml += '<span class="badge bg-secondary">' + attraction.city + '</span>';
+                        attractionsHtml += '</div>';
+
+                        // 显示推荐参观时间
+                        if (visitTime) {
+                            attractionsHtml += '<div class="mt-1">';
+                            attractionsHtml += '<small class="text-primary">推荐参观时间：' + visitTime + '</small>';
+                            attractionsHtml += '</div>';
+                        }
+
+                        // 显示交通信息
+                        if (travelInfo && j > 0) {
+                            attractionsHtml += '<div class="mt-1">';
+                            attractionsHtml += '<small class="text-info">';
+                            attractionsHtml += '交通：' + travelInfo.transportation + ' | ';
+                            attractionsHtml += '距离：' + travelInfo.distance + ' | ';
+                            attractionsHtml += '预计耗时：' + travelInfo.travel_time;
+                            attractionsHtml += '</small>';
+                            attractionsHtml += '</div>';
+                        }
+
+                        // 显示风险评估信息
+                        if (dayPlan.risk_assessment && dayPlan.risk_assessment.length > 0) {
+                            const risk = dayPlan.risk_assessment[j];
+                            if (risk) {
+                                let riskColor = 'text-success';
+                                if (risk.risk_level === '中风险') {
+                                    riskColor = 'text-warning';
+                                } else if (risk.risk_level === '高风险') {
+                                    riskColor = 'text-danger';
+                                }
+
+                                attractionsHtml += '<div class="mt-1">';
+                                attractionsHtml += '<small class="' + riskColor + '">';
+                                attractionsHtml += '风险等级：' + risk.risk_level + ' | ';
+                                attractionsHtml += '建议：' + risk.advice;
+                                attractionsHtml += '</small>';
+                                attractionsHtml += '</div>';
+                            }
+                        }
+
+                        attractionsHtml += '<div class="mt-1">';
+                        attractionsHtml += '<small class="text-muted">类型：' + attraction.type + ' | 评分：' + rating + ' | 价格：' + price + '元</small>';
+                        attractionsHtml += '</div>';
+                        attractionsHtml += '</div>';
+                    }
+                } else {
+                    attractionsHtml = '<p class="text-center text-muted">暂无推荐景点</p>';
+                }
+            } else {
+                attractionsHtml = '<p class="text-center text-muted">暂无推荐景点</p>';
+            }
+
+            // 构建卡片HTML
+            card.innerHTML = '<div class="card-header bg-' + dayColor + ' text-white">';
+            card.innerHTML += '<div class="d-flex justify-content-between align-items-center">';
+            card.innerHTML += '<h5 class="mb-0">';
+            card.innerHTML += '<span class="badge bg-white text-' + dayColor + ' day-badge mr-2">' + dayNum + '</span>';
+            card.innerHTML += '第' + dayNum + '天行程';
+            card.innerHTML += '</h5>';
+            card.innerHTML += weatherHtml;
+            card.innerHTML += '</div>';
+            card.innerHTML += '</div>';
+            card.innerHTML += '<div class="card-body">';
+            card.innerHTML += '<h6>推荐景点：</h6>';
+            card.innerHTML += '<div class="mt-2">' + attractionsHtml + '</div>';
+            card.innerHTML += '</div>';
+
+            container.appendChild(card);
+        }
+
+        // 添加行程卡片容器的样式，实现一行一天的卡片
+        container.style.display = 'block';
+        container.style.gap = '1rem';
+    }
+
+    // 生成地图
+    function generateMap(itinerary, start_city, target_city) {
+        console.log('开始生成地图，行程数据:', itinerary, '起点城市:', start_city, '目标城市:', target_city);
+
+        // 发送请求生成地图
+        fetch('/path/generate_map', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ itinerary: itinerary, start_city: start_city, target_city: target_city })
+        })
+            .then(function (response) {
+                console.log('地图生成API响应状态:', response.status);
+                return response.text();
+            })
+            .then(function (responseText) {
+                console.log('地图生成API响应文本长度:', responseText.length);
+                try {
+                    return JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('解析地图生成API响应失败:', parseError);
+                    alert('解析地图数据失败: ' + parseError.message);
+                    throw parseError;
+                }
+            })
+            .then(function (result) {
+                console.log('地图生成API响应结果:', result);
+                if (result.success) {
+                    console.log('地图HTML长度:', result.map_html.length);
+
+                    // 显示地图
+                    const mapCard = document.getElementById('map-card');
+                    const mapContainer = document.getElementById('map-container');
+
+                    // 确保地图容器有正确的尺寸
+                    mapCard.style.display = 'block';
+                    mapContainer.style.height = '600px';
+                    mapContainer.style.width = '100%';
+
+                    // 清空地图容器
+                    mapContainer.innerHTML = '';
+
+                    // 创建iframe来显示地图HTML
+                    const iframe = document.createElement('iframe');
+                    iframe.style.width = '100%';
+                    iframe.style.height = '100%';
+                    iframe.style.border = 'none';
+                    iframe.style.borderRadius = '8px';
+
+                    // 设置iframe的srcdoc属性为地图HTML
+                    iframe.srcdoc = result.map_html;
+
+                    // 将iframe添加到地图容器中
+                    mapContainer.appendChild(iframe);
+
+                    console.log('地图生成成功并显示');
+                } else {
+                    console.error('地图生成失败:', result.message);
+                    alert('地图生成失败: ' + result.message);
+                }
+            })
+            .catch(function (error) {
+                console.error('生成地图时出错:', error);
+                alert('生成地图时出错: ' + error.message);
+            });
+    }
+</script>
+{% endblock %}

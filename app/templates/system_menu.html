@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% block title %}系统菜单 - 辽宁省智慧旅游系统{% endblock %}
+
+{% block styles %}
+<style>
+    /* 仅保留loading指示器样式，其他样式已移至全局CSS */
+    .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1rem 2rem;
+        border-radius: var(--border-radius-sm);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    /* 动画效果保留 */
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* 主界面样式 */
+    .hero-section {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: white;
+        padding: 40px 0;
+        margin-bottom: 30px;
+        border-radius: var(--border-radius-lg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: white;
+    }
+
+    .hero-section p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 24px;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+        text-align: center;
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+
+    .stat-desc {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        opacity: 0.8;
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 30px;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: var(--border-radius);
+        padding: 30px;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--card-shadow-hover);
+    }
+
+    .feature-card i {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: var(--dark-color);
+    }
+
+    .feature-card p {
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+    }
+
+    .feature-card .btn {
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- 欢迎横幅 -->
+<div class="hero-section">
+    <div class="container">
+        <h1>欢迎使用辽宁省智慧旅游系统</h1>
+        <p>基于AI的旅游数据分析平台，为您提供精准的天气预测、智能的景点推荐和个性化的行程规划</p>
+    </div>
+</div>
+
+<!-- 统计卡片 -->
+<div class="container">
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-value">98.5%</div>
+            <div class="stat-label">预测准确率</div>
+            <div class="stat-desc">基于STM模型的精准预测，优于传统ARIMA方法</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">22%</div>
+            <div class="stat-label">成本降低</div>
+            <div class="stat-desc">智能安全库存计算，减少缺货率25%以上</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">18%</div>
+            <div class="stat-label">收入增长</div>
+            <div class="stat-desc">基于价格弹性的动态调整，最大化销售收入</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">14</div>
+            <div class="stat-label">覆盖城市</div>
+            <div class="stat-desc">覆盖辽宁省14个主要城市，提供全面的旅游数据</div>
+        </div>
+    </div>
+
+    <!-- 核心功能模块 -->
+    <h2 class="mb-4">核心功能模块</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <i class="bi bi-bar-chart-line"></i>
+            <h3>可视化分析</h3>
+            <p>提供全面的天气、客流量和风险评估数据分析，支持多种图表类型</p>
+            <button class="btn btn-primary"
+                onclick="window.location.href = '{{ url_for('visualizations.dashboard') }}';">进入</button>
+        </div>
+        <div class="feature-card">
+            <i class="bi bi-geo-alt-fill"></i>
+            <h3>地图可视化</h3>
+            <p>直观展示辽宁省各城市的旅游数据和景点分布，支持交互式操作</p>
+            <a href="{{ url_for('map_view.index') }}" class="btn btn-primary">进入</a>
+        </div>
+        {% if current_user.is_admin() %}
+        <div class="feature-card">
+            <i class="bi bi-people-fill"></i>
+            <h3>用户管理</h3>
+            <p>管理系统用户和权限，支持用户注册、登录和个人信息管理</p>
+            <a href="{{ url_for('user_management.index') }}" class="btn btn-primary">进入</a>
+        </div>
+        {% endif %}
+        <div class="feature-card">
+            <i class="bi bi-compass-fill"></i>
+            <h3>旅游决策中心</h3>
+            <p>基于天气和客流量数据，为用户提供智能的旅游决策支持</p>
+            <a href="{{ url_for('tourism_decision_center.index') }}" class="btn btn-primary">进入</a>
+        </div>
+        <div class="feature-card">
+            <i class="bi bi-table"></i>
+            <h3>数据查询</h3>
+            <p>支持对历史天气、客流量和风险评估数据的查询和导出</p>
+            <a href="{{ url_for('query_view.index') }}" class="btn btn-primary">进入</a>
+        </div>
+        <div class="feature-card">
+            <i class="bi bi-star-fill"></i>
+            <h3>旅游推荐</h3>
+            <p>基于用户偏好和天气情况，提供个性化的景点推荐和行程规划</p>
+            <a href="{{ url_for('recommendation.index') }}" class="btn btn-primary">进入</a>
+        </div>
+        <div class="feature-card">
+            <i class="bi bi-geo-alt-fill"></i>
+            <h3>路径优化</h3>
+            <p>智能规划最优旅游路径，考虑景点分布、交通和时间因素</p>
+            <a href="{{ url_for('path_optimization.index') }}" class="btn btn-primary">进入</a>
+        </div>
+        <div class="feature-card">
+            <i class="bi bi-cloud-sun-fill"></i>
+            <h3>天气预测</h3>
+            <p>提供未来7天的天气预报和旅游指数，帮助用户合理安排行程</p>
+            <a href="{{ url_for('prediction.index') }}" class="btn btn-primary">进入</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

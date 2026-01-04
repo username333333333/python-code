@@ -4415,3 +4415,4 @@
 2026-01-03 22:46:03,144 - app - INFO - 管理员登出成功: admin (admin@example.com) from 127.0.0.1
 2026-01-03 22:46:20,797 - app - INFO - 管理员登录成功: admin@example.com from 192.168.60.33
 2026-01-03 22:50:13,706 - app - INFO - 管理员登录成功: admin@example.com from 127.0.0.1
+2026-01-03 22:52:18,364 - app - INFO - Application startup

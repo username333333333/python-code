@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>可视化分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>旅游数据可视化分析</h1>
+        <div class="chart-container" id="temp-line-chart" style="height: 400px;"></div>
+    </div>
+
+    <script>
+        function renderChart() {
+            const container = document.getElementById('temp-line-chart');
+            const chart = echarts.init(container);
+
+            {% if charts.temp_line %}
+            const chartOptions = {{ charts.temp_line | safe
+        }};
+        chart.setOption(chartOptions);
+        {% endif %}
+
+        window.addEventListener('resize', function () {
+            chart.resize();
+        });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            renderChart();
+        });
+    </script>
+</body>
+
+</html>

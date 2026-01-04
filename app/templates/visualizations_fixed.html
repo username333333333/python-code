@@ -1,0 +1,567 @@
+{% extends "base.html" %}
+
+{% block title %}可视化分析 - 辽宁省智慧旅游系统{% endblock %}
+
+{% block styles %}
+<style>
+    /* 图表容器样式，确保有固定高度 */
+    .chart-container {
+        height: 400px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        margin: 0 auto 2rem auto;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        position: relative;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* 图表标题样式 */
+    .chart-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 1.5rem 0 1rem 0;
+        padding-left: 0.75rem;
+        border-left: 4px solid #0d6efd;
+        background: rgba(255, 255, 255, 0.95);
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-radius: 0 0.25rem 0.25rem 0;
+    }
+
+    /* 筛选表单样式 */
+    .filter-form {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* 无数据提示样式 */
+    .no-data-alert {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        border: none;
+    }
+
+    /* 加载指示器样式 */
+    .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* 自定义按钮样式，保持与主题一致 */
+    .btn-primary {
+        background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+        border: none;
+        box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #0b5ed7, #0a58ca);
+        box-shadow: 0 4px 8px rgba(13, 110, 253, 0.4);
+        transform: translateY(-1px);
+    }
+
+    /* 主内容区域内边距 */
+    main {
+        padding: 2rem;
+    }
+
+    /* 标题样式 */
+    h2 {
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e9ecef;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h2>旅游数据可视化分析</h2>
+
+    <!-- 筛选表单 -->
+    <div class="filter-form">
+        <form method="get" action="{{ url_for('visualizations.dashboard') }}">
+            <input type="hidden" name="data_type" value="history">
+
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label for="history_city" class="form-label">选择城市</label>
+                    <select name="city" id="history_city" class="form-select">
+                        {% for city_name in cities %}
+                        <option value="{{ city_name }}" {% if city==city_name %}selected{% endif %}>{{ city_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="start_date" class="form-label">开始日期</label>
+                    <input type="date" name="start_date" id="start_date" class="form-control"
+                        value="{{ filters.start_date }}">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="end_date" class="form-label">结束日期</label>
+                    <input type="date" name="end_date" id="end_date" class="form-control"
+                        value="{{ filters.end_date }}">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="chart_type" class="form-label">图表类型</label>
+                    <select name="chart_type" id="chart_type" class="form-select">
+                        <option value="all" {% if filters.chart_type=='all' %}selected{% endif %}>全部图表</option>
+                        <option value="temp_line" {% if filters.chart_type=='temp_line' %}selected{% endif %}>温度变化
+                        </option>
+                        <option value="weather_bar" {% if filters.chart_type=='weather_bar' %}selected{% endif %}>天气频率统计
+                        </option>
+                        <option value="wind_scatter" {% if filters.chart_type=='wind_scatter' %}selected{% endif %}>风力分布
+                        </option>
+                        <option value="top10_bar" {% if filters.chart_type=='top10_bar' %}selected{% endif %}>旅游推荐Top10
+                        </option>
+                        <option value="traffic_trend" {% if filters.chart_type=='traffic_trend' %}selected{% endif %}>
+                            客流量趋势</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">查询数据</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- 图表容器 -->
+    <div class="row">
+        <!-- 温度趋势图 -->
+        {% if charts.temp_line or filters.chart_type in ['all', 'temp_line'] %}
+        <div class="col-md-12">
+            <div class="chart-title">气温趋势图</div>
+            <div class="chart-container" id="temp_line">
+                {% if not charts.temp_line %}
+                <div class="no-data-alert alert alert-warning">暂无气温趋势数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 天气频率统计 -->
+        {% if charts.weather_bar or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">天气频率统计</div>
+            <div class="chart-container" id="weather_bar">
+                {% if not charts.weather_bar %}
+                <div class="no-data-alert alert alert-warning">暂无天气频率统计数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 风力分布散点图 -->
+        {% if charts.wind_scatter or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">风力分布散点图</div>
+            <div class="chart-container" id="wind_scatter">
+                {% if not charts.wind_scatter %}
+                <div class="no-data-alert alert alert-warning">暂无风力分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 季节分布饼图 -->
+        {% if (charts.day_season_pie or charts.night_season_pie) and filters.chart_type == 'all' %}
+        <div class="col-md-6">
+            <div class="chart-title">白天季节分布</div>
+            <div class="chart-container" id="day_season_pie">
+                {% if not charts.day_season_pie %}
+                <div class="no-data-alert alert alert-warning">暂无白天季节分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-title">夜间季节分布</div>
+            <div class="chart-container" id="night_season_pie">
+                {% if not charts.night_season_pie %}
+                <div class="no-data-alert alert alert-warning">暂无夜间季节分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 气温热力图 -->
+        {% if charts.temp_heatmap or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">气温热力图</div>
+            <div class="chart-container" id="temp_heatmap">
+                {% if not charts.temp_heatmap %}
+                <div class="no-data-alert alert alert-warning">暂无气温热力图数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 天气状况饼图 -->
+        {% if (charts.weather_day_pie or charts.weather_night_pie) and filters.chart_type == 'all' %}
+        <div class="col-md-6">
+            <div class="chart-title">白天天气状况</div>
+            <div class="chart-container" id="weather_day_pie">
+                {% if not charts.weather_day_pie %}
+                <div class="no-data-alert alert alert-warning">暂无白天天气状况数据</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-title">夜间天气状况</div>
+            <div class="chart-container" id="weather_night_pie">
+                {% if not charts.weather_night_pie %}
+                <div class="no-data-alert alert alert-warning">暂无夜间天气状况数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 风向玫瑰图 -->
+        {% if (charts.wind_day_rose or charts.wind_night_rose) and filters.chart_type == 'all' %}
+        <div class="col-md-6">
+            <div class="chart-title">白天风向分布</div>
+            <div class="chart-container" id="wind_day_rose">
+                {% if not charts.wind_day_rose %}
+                <div class="no-data-alert alert alert-warning">暂无白天风向分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-title">夜间风向分布</div>
+            <div class="chart-container" id="wind_night_rose">
+                {% if not charts.wind_night_rose %}
+                <div class="no-data-alert alert alert-warning">暂无夜间风向分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 旅游推荐Top10 -->
+        {% if charts.top10_bar or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">旅游推荐Top10</div>
+            <div class="chart-container" id="top10_bar">
+                {% if not charts.top10_bar %}
+                <div class="no-data-alert alert alert-warning">暂无旅游推荐数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 客流量趋势图 -->
+        {% if charts.traffic_trend or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">客流量趋势图</div>
+            <div class="chart-container" id="traffic_trend">
+                {% if not charts.traffic_trend %}
+                <div class="no-data-alert alert alert-warning">暂无客流量趋势数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 节假日客流量对比 -->
+        {% if charts.holiday_traffic_comparison or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">节假日客流量对比</div>
+            <div class="chart-container" id="holiday_traffic_comparison">
+                {% if not charts.holiday_traffic_comparison %}
+                <div class="no-data-alert alert alert-warning">暂无节假日客流量对比数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 天气与客流量关系 -->
+        {% if charts.weather_traffic_scatter or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">天气与客流量关系</div>
+            <div class="chart-container" id="weather_traffic_scatter">
+                {% if not charts.weather_traffic_scatter %}
+                <div class="no-data-alert alert alert-warning">暂无天气与客流量关系数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 景点客流量排名 -->
+        {% if charts.attraction_traffic_ranking or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">景点客流量排名</div>
+            <div class="chart-container" id="attraction_traffic_ranking">
+                {% if not charts.attraction_traffic_ranking %}
+                <div class="no-data-alert alert alert-warning">暂无景点客流量排名数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 季节性客流量分布 -->
+        {% if charts.seasonal_traffic or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">季节性客流量分布</div>
+            <div class="chart-container" id="seasonal_traffic">
+                {% if not charts.seasonal_traffic %}
+                <div class="no-data-alert alert alert-warning">暂无季节性客流量分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 风险等级分布 -->
+        {% if charts.risk_level_distribution or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">风险等级分布</div>
+            <div class="chart-container" id="risk_level_distribution">
+                {% if not charts.risk_level_distribution %}
+                <div class="no-data-alert alert alert-warning">暂无风险等级分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 风险等级时间趋势 -->
+        {% if charts.risk_level_time_trend or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">风险等级时间趋势</div>
+            <div class="chart-container" id="risk_level_time_trend">
+                {% if not charts.risk_level_time_trend %}
+                <div class="no-data-alert alert alert-warning">暂无风险等级时间趋势数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 天气与风险关系 -->
+        {% if charts.weather_risk_relationship or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">天气与风险关系</div>
+            <div class="chart-container" id="weather_risk_relationship">
+                {% if not charts.weather_risk_relationship %}
+                <div class="no-data-alert alert alert-warning">暂无天气与风险关系数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 运营建议分布 -->
+        {% if charts.operation_suggestion_distribution or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">运营建议分布</div>
+            <div class="chart-container" id="operation_suggestion_distribution">
+                {% if not charts.operation_suggestion_distribution %}
+                <div class="no-data-alert alert alert-warning">暂无运营建议分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- 天气与运营关系 -->
+        {% if charts.weather_operation_relationship or filters.chart_type == 'all' %}
+        <div class="col-md-12">
+            <div class="chart-title">天气与运营关系</div>
+            <div class="chart-container" id="weather_operation_relationship">
+                {% if not charts.weather_operation_relationship %}
+                <div class="no-data-alert alert alert-warning">暂无天气与运营关系数据</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 渲染图表的函数
+    function renderChart(chartId, chartOptions) {
+        const container = document.getElementById(chartId);
+        if (!container || !chartOptions) return;
+
+        // 检查是否已经有图表实例
+        const existingChart = echarts.getInstanceByDom(container);
+        if (existingChart) {
+            existingChart.dispose();
+        }
+
+        // 创建新的图表实例
+        const chart = echarts.init(container);
+
+        // 自定义图表主题颜色，与项目风格保持一致
+        const themeColors = ['#0d6efd', '#6610f2', '#6f42c1', '#dc3545', '#fd7e14', '#ffc107', '#20c997', '#0dcaf0'];
+
+        // 设置图表主题颜色
+        if (chartOptions.color) {
+            chartOptions.color = themeColors;
+        } else {
+            chartOptions.color = themeColors;
+        }
+
+        // 设置图表选项
+        chart.setOption(chartOptions);
+
+        // 响应式调整
+        window.addEventListener('resize', function () {
+            chart.resize();
+        });
+    }
+
+    // 初始化所有图表
+    function initCharts() {
+        // 温度趋势图
+        {% if charts.temp_line %}
+        const tempLineOptions = {{ charts.temp_line | safe
+    }};
+    renderChart('temp_line', tempLineOptions);
+    {% endif %}
+
+    // 天气频率统计
+    {% if charts.weather_bar %}
+    const weatherBarOptions = {{ charts.weather_bar | safe }};
+    renderChart('weather_bar', weatherBarOptions);
+    {% endif %}
+
+    // 风力分布散点图
+    {% if charts.wind_scatter %}
+    const windScatterOptions = {{ charts.wind_scatter | safe }};
+    renderChart('wind_scatter', windScatterOptions);
+    {% endif %}
+
+    // 季节分布饼图
+    {% if charts.day_season_pie %}
+    const daySeasonPieOptions = {{ charts.day_season_pie | safe }};
+    renderChart('day_season_pie', daySeasonPieOptions);
+    {% endif %}
+    {% if charts.night_season_pie %}
+    const nightSeasonPieOptions = {{ charts.night_season_pie | safe }};
+    renderChart('night_season_pie', nightSeasonPieOptions);
+    {% endif %}
+
+    // 气温热力图
+    {% if charts.temp_heatmap %}
+    const tempHeatmapOptions = {{ charts.temp_heatmap | safe }};
+    renderChart('temp_heatmap', tempHeatmapOptions);
+    {% endif %}
+
+    // 天气状况饼图
+    {% if charts.weather_day_pie %}
+    const weatherDayPieOptions = {{ charts.weather_day_pie | safe }};
+    renderChart('weather_day_pie', weatherDayPieOptions);
+    {% endif %}
+    {% if charts.weather_night_pie %}
+    const weatherNightPieOptions = {{ charts.weather_night_pie | safe }};
+    renderChart('weather_night_pie', weatherNightPieOptions);
+    {% endif %}
+
+    // 风向玫瑰图
+    {% if charts.wind_day_rose %}
+    const windDayRoseOptions = {{ charts.wind_day_rose | safe }};
+    renderChart('wind_day_rose', windDayRoseOptions);
+    {% endif %}
+    {% if charts.wind_night_rose %}
+    const windNightRoseOptions = {{ charts.wind_night_rose | safe }};
+    renderChart('wind_night_rose', windNightRoseOptions);
+    {% endif %}
+
+    // 旅游推荐Top10
+    {% if charts.top10_bar %}
+    const top10BarOptions = {{ charts.top10_bar | safe }};
+    renderChart('top10_bar', top10BarOptions);
+    {% endif %}
+
+    // 客流量趋势图
+    {% if charts.traffic_trend %}
+    const trafficTrendOptions = {{ charts.traffic_trend | safe }};
+    renderChart('traffic_trend', trafficTrendOptions);
+    {% endif %}
+
+    // 节假日客流量对比
+    {% if charts.holiday_traffic_comparison %}
+    const holidayTrafficComparisonOptions = {{ charts.holiday_traffic_comparison | safe }};
+    renderChart('holiday_traffic_comparison', holidayTrafficComparisonOptions);
+    {% endif %}
+
+    // 天气与客流量关系
+    {% if charts.weather_traffic_scatter %}
+    const weatherTrafficScatterOptions = {{ charts.weather_traffic_scatter | safe }};
+    renderChart('weather_traffic_scatter', weatherTrafficScatterOptions);
+    {% endif %}
+
+    // 景点客流量排名
+    {% if charts.attraction_traffic_ranking %}
+    const attractionTrafficRankingOptions = {{ charts.attraction_traffic_ranking | safe }};
+    renderChart('attraction_traffic_ranking', attractionTrafficRankingOptions);
+    {% endif %}
+
+    // 季节性客流量分布
+    {% if charts.seasonal_traffic %}
+    const seasonalTrafficOptions = {{ charts.seasonal_traffic | safe }};
+    renderChart('seasonal_traffic', seasonalTrafficOptions);
+    {% endif %}
+
+    // 风险等级分布
+    {% if charts.risk_level_distribution %}
+    const riskLevelDistributionOptions = {{ charts.risk_level_distribution | safe }};
+    renderChart('risk_level_distribution', riskLevelDistributionOptions);
+    {% endif %}
+
+    // 风险等级时间趋势
+    {% if charts.risk_level_time_trend %}
+    const riskLevelTimeTrendOptions = {{ charts.risk_level_time_trend | safe }};
+    renderChart('risk_level_time_trend', riskLevelTimeTrendOptions);
+    {% endif %}
+
+    // 天气与风险关系
+    {% if charts.weather_risk_relationship %}
+    const weatherRiskRelationshipOptions = {{ charts.weather_risk_relationship | safe }};
+    renderChart('weather_risk_relationship', weatherRiskRelationshipOptions);
+    {% endif %}
+
+    // 运营建议分布
+    {% if charts.operation_suggestion_distribution %}
+    const operationSuggestionDistributionOptions = {{ charts.operation_suggestion_distribution | safe }};
+    renderChart('operation_suggestion_distribution', operationSuggestionDistributionOptions);
+    {% endif %}
+
+    // 天气与运营关系
+    {% if charts.weather_operation_relationship %}
+    const weatherOperationRelationshipOptions = {{ charts.weather_operation_relationship | safe }};
+    renderChart('weather_operation_relationship', weatherOperationRelationshipOptions);
+    {% endif %}
+
+
+        }
+
+    // 页面加载完成后初始化图表
+    document.addEventListener('DOMContentLoaded', function () {
+        initCharts();
+    });
+</script>
+{% endblock %}

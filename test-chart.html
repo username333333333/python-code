@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可视化分析 - 辽宁省智慧旅游系统</title>
+    <style>
+        /* 图表容器样式，确保有固定高度 */
+        .chart-container {
+            height: 400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 0 auto;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* 图表标题样式 */
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+            margin: 1.5rem 0 1rem 0;
+            padding-left: 0.5rem;
+            border-left: 4px solid #0d6efd;
+        }
+
+        /* 筛选表单样式 */
+        .filter-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        /* 无数据提示样式 */
+        .no-data-alert {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            border: none;
+        }
+
+        /* 加载指示器样式 */
+        .loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">旅游数据可视化分析</h2>
+
+        <!-- 历史数据分析 -->
+        <!-- 筛选表单 -->
+        <div class="filter-form">
+            <form method="get" action="/dashboard">
+                <input type="hidden" name="data_type" value="history">
+
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label for="history_city" class="form-label">选择城市</label>
+                        <select name="city" id="history_city" class="form-select">
+                            
+                            <option value="沈阳" selected>沈阳</option>
+                            
+                            <option value="大连" >大连</option>
+                            
+                            <option value="鞍山" >鞍山</option>
+                            
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="start_date" class="form-label">开始日期</label>
+                        <input type="date" name="start_date" id="start_date" class="form-control" value="">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="end_date" class="form-label">结束日期</label>
+                        <input type="date" name="end_date" id="end_date" class="form-control" value="">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="chart_type" class="form-label">图表类型</label>
+                        <select name="chart_type" id="chart_type" class="form-select">
+                            <option value="all" selected>全部图表</option>
+                            <option value="temp_line" >温度变化</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                            查询数据
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 历史数据分析图表 -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-title">历史温度变化</div>
+                <div class="chart-container" id="temp-line-chart">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 渲染图表的函数
+        function renderChart(chartId, chartOptions) {
+            const container = document.getElementById(chartId);
+            if (!container || !chartOptions) return;
+
+            // 检查是否已经有图表实例
+            const existingChart = echarts.getInstanceByDom(container);
+            if (existingChart) {
+                existingChart.dispose();
+            }
+            
+            // 创建新的图表实例
+            const chart = echarts.init(container);
+            
+            // 设置图表选项
+            chart.setOption(chartOptions);
+            
+            // 响应式调整
+            window.addEventListener('resize', function () {
+                chart.resize();
+            });
+        }
+        
+        // 初始化所有图表
+        function initCharts() {
+            // 图表数据来自后端传递的charts变量
+            const chartOptions = {};
+            
+            // 温度变化图表
+            
+            chartOptions.temp_line = {
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "series": [
+        {
+            "type": "line",
+            "name": "\u6700\u9ad8\u6c14\u6e29",
+            "connectNulls": false,
+            "xAxisIndex": 0,
+            "symbol": "circle",
+            "symbolSize": 6,
+            "showSymbol": true,
+            "smooth": false,
+            "clip": true,
+            "step": false,
+            "data": [
+                [
+                    "2025-12-03",
+                    15
+                ],
+                [
+                    "2025-12-04",
+                    16
+                ],
+                [
+                    "2025-12-05",
+                    14
+                ],
+                [
+                    "2025-12-06",
+                    17
+                ],
+                [
+                    "2025-12-07",
+                    18
+                ],
+                [
+                    "2025-12-08",
+                    19
+                ],
+                [
+                    "2025-12-09",
+                    20
+                ],
+                [
+                    "2025-12-10",
+                    18
+                ],
+                [
+                    "2025-12-11",
+                    17
+                ],
+                [
+                    "2025-12-12",
+                    16
+                ],
+                [
+                    "2025-12-13",
+                    15
+                ],
+                [
+                    "2025-12-14",
+                    14
+                ],
+                [
+                    "2025-12-15",
+                    13
+                ],
+                [
+                    "2025-12-16",
+                    12
+                ],
+                [
+                    "2025-12-17",
+                    11
+                ],
+                [
+                    "2025-12-18",
+                    10
+                ],
+                [
+                    "2025-12-19",
+                    12
+                ],
+                [
+                    "2025-12-20",
+                    14
+                ],
+                [
+                    "2025-12-21",
+                    16
+                ],
+                [
+                    "2025-12-22",
+                    18
+                ],
+                [
+                    "2025-12-23",
+                    20
+                ],
+                [
+                    "2025-12-24",
+                    22
+                ],
+                [
+                    "2025-12-25",
+                    24
+                ],
+                [
+                    "2025-12-26",
+                    26
+                ],
+                [
+                    "2025-12-27",
+                    28
+                ],
+                [
+                    "2025-12-28",
+                    30
+                ],
+                [
+                    "2025-12-29",
+                    28
+                ],
+                [
+                    "2025-12-30",
+                    26
+                ],
+                [
+                    "2025-12-31",
+                    24
+                ],
+                [
+                    "2026-01-01",
+                    22
+                ]
+            ],
+            "hoverAnimation": true,
+            "label": {
+                "show": true,
+                "margin": 8
+            },
+            "logBase": 10,
+            "seriesLayoutBy": "column",
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "areaStyle": {
+                "opacity": 0
+            },
+            "zlevel": 0,
+            "z": 0
+        },
+        {
+            "type": "line",
+            "name": "\u6700\u4f4e\u6c14\u6e29",
+            "connectNulls": false,
+            "xAxisIndex": 0,
+            "symbol": "circle",
+            "symbolSize": 6,
+            "showSymbol": true,
+            "smooth": false,
+            "clip": true,
+            "step": false,
+            "data": [
+                [
+                    "2025-12-03",
+                    5
+                ],
+                [
+                    "2025-12-04",
+                    6
+                ],
+                [
+                    "2025-12-05",
+                    4
+                ],
+                [
+                    "2025-12-06",
+                    7
+                ],
+                [
+                    "2025-12-07",
+                    8
+                ],
+                [
+                    "2025-12-08",
+                    9
+                ],
+                [
+                    "2025-12-09",
+                    10
+                ],
+                [
+                    "2025-12-10",
+                    8
+                ],
+                [
+                    "2025-12-11",
+                    7
+                ],
+                [
+                    "2025-12-12",
+                    6
+                ],
+                [
+                    "2025-12-13",
+                    5
+                ],
+                [
+                    "2025-12-14",
+                    4
+                ],
+                [
+                    "2025-12-15",
+                    3
+                ],
+                [
+                    "2025-12-16",
+                    2
+                ],
+                [
+                    "2025-12-17",
+                    1
+                ],
+                [
+                    "2025-12-18",
+                    0
+                ],
+                [
+                    "2025-12-19",
+                    2
+                ],
+                [
+                    "2025-12-20",
+                    4
+                ],
+                [
+                    "2025-12-21",
+                    6
+                ],
+                [
+                    "2025-12-22",
+                    8
+                ],
+                [
+                    "2025-12-23",
+                    10
+                ],
+                [
+                    "2025-12-24",
+                    12
+                ],
+                [
+                    "2025-12-25",
+                    14
+                ],
+                [
+                    "2025-12-26",
+                    16
+                ],
+                [
+                    "2025-12-27",
+                    18
+                ],
+                [
+                    "2025-12-28",
+                    20
+                ],
+                [
+                    "2025-12-29",
+                    18
+                ],
+                [
+                    "2025-12-30",
+                    16
+                ],
+                [
+                    "2025-12-31",
+                    14
+                ],
+                [
+                    "2026-01-01",
+                    12
+                ]
+            ],
+            "hoverAnimation": true,
+            "label": {
+                "show": true,
+                "margin": 8
+            },
+            "logBase": 10,
+            "seriesLayoutBy": "column",
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "areaStyle": {
+                "opacity": 0
+            },
+            "zlevel": 0,
+            "z": 0
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                "\u6700\u9ad8\u6c14\u6e29",
+                "\u6700\u4f4e\u6c14\u6e29"
+            ],
+            "selected": {},
+            "show": true,
+            "top": "30px",
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "textStyle": {
+                "fontSize": 12
+            },
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderWidth": 1,
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "axis",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "cross"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "formatter": "{b}<br/>{a}: {c}\u00b0C",
+        "textStyle": {
+            "fontSize": 14
+        },
+        "backgroundColor": "rgba(255, 255, 255, 0.95)",
+        "borderColor": "#ccc",
+        "borderWidth": 1,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "xAxis": [
+        {
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "gridIndex": 0,
+            "axisLabel": {
+                "show": true,
+                "rotate": 45,
+                "margin": 8,
+                "fontSize": 10
+            },
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                "2025-12-03",
+                "2025-12-04",
+                "2025-12-05",
+                "2025-12-06",
+                "2025-12-07",
+                "2025-12-08",
+                "2025-12-09",
+                "2025-12-10",
+                "2025-12-11",
+                "2025-12-12",
+                "2025-12-13",
+                "2025-12-14",
+                "2025-12-15",
+                "2025-12-16",
+                "2025-12-17",
+                "2025-12-18",
+                "2025-12-19",
+                "2025-12-20",
+                "2025-12-21",
+                "2025-12-22",
+                "2025-12-23",
+                "2025-12-24",
+                "2025-12-25",
+                "2025-12-26",
+                "2025-12-27",
+                "2025-12-28",
+                "2025-12-29",
+                "2025-12-30",
+                "2025-12-31",
+                "2026-01-01"
+            ]
+        }
+    ],
+    "yAxis": [
+        {
+            "name": "\u6e29\u5ea6(\u2103)",
+            "show": true,
+            "scale": false,
+            "nameLocation": "end",
+            "nameGap": 15,
+            "nameTextStyle": {
+                "fontWeight": "bold",
+                "fontSize": 12
+            },
+            "gridIndex": 0,
+            "axisLabel": {
+                "show": true,
+                "margin": 8,
+                "formatter": "{value}\u00b0C"
+            },
+            "inverse": false,
+            "offset": 0,
+            "splitNumber": 5,
+            "minInterval": 0,
+            "splitLine": {
+                "show": true,
+                "lineStyle": {
+                    "show": true,
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0,
+                    "type": "solid"
+                }
+            }
+        }
+    ],
+    "title": [
+        {
+            "show": true,
+            "text": "\u6c14\u6e29\u53d8\u5316\u8d8b\u52bf",
+            "target": "blank",
+            "subtarget": "blank",
+            "padding": 5,
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false,
+            "textStyle": {
+                "fontWeight": "bold",
+                "fontSize": 18
+            }
+        }
+    ],
+    "dataZoom": [
+        {
+            "show": true,
+            "type": "inside",
+            "showDetail": true,
+            "showDataShadow": true,
+            "realtime": true,
+            "start": 20,
+            "end": 80,
+            "orient": "horizontal",
+            "zoomLock": false,
+            "filterMode": "filter"
+        },
+        {
+            "show": true,
+            "type": "slider",
+            "showDetail": true,
+            "showDataShadow": true,
+            "realtime": true,
+            "start": 20,
+            "end": 80,
+            "orient": "horizontal",
+            "zoomLock": false,
+            "filterMode": "filter"
+        }
+    ]
+};
+            renderChart('temp-line-chart', chartOptions.temp_line);
+            
+        }
+        
+        // 页面加载完成后初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            initCharts();
+        });
+    </script>
+</body>
+</html>

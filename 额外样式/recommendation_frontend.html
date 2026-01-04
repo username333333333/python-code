@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+
+{% block title %}智能推荐系统{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">智能推荐系统</h1>
+    
+    <!-- 推荐设置 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            推荐设置
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="recommendationType" class="form-label">推荐类型</label>
+                    <select class="form-select" id="recommendationType">
+                        <option value="hybrid">混合推荐</option>
+                        <option value="collaborative">协同过滤</option>
+                        <option value="demand_based">需求预测</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="numRecommendations" class="form-label">推荐数量</label>
+                    <input type="number" class="form-control" id="numRecommendations" min="1" max="20" value="10">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">&nbsp;</label>
+                    <button id="refreshRecommendations" class="btn btn-primary form-control">刷新推荐</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 推荐结果 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            为您推荐的产品
+        </div>
+        <div class="card-body">
+            <div id="recommendationsContainer" class="row">
+                <!-- 推荐结果将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- 热门产品 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            热门产品
+        </div>
+        <div class="card-body">
+            <div id="popularProductsContainer" class="row">
+                <!-- 热门产品将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- 交互记录 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            我的交互记录
+        </div>
+        <div class="card-body">
+            <table id="interactionTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>产品ID</th>
+                        <th>交互类型</th>
+                        <th>交互值</th>
+                        <th>交互时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 交互记录将通过JavaScript动态加载 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+// 页面加载完成后初始化
+$(document).ready(function() {
+    // 加载推荐结果
+    loadRecommendations();
+    
+    // 加载热门产品
+    loadPopularProducts();
+    
+    // 刷新推荐按钮点击事件
+    $('#refreshRecommendations').click(function() {
+        loadRecommendations();
+    });
+    
+    // 推荐类型或数量改变时自动刷新
+    $('#recommendationType, #numRecommendations').change(function() {
+        loadRecommendations();
+    });
+});
+
+// 加载推荐结果
+function loadRecommendations() {
+    // 显示加载状态
+    $('#recommendationsContainer').html('<div class="col-12 text-center py-5"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+    
+    // 获取参数
+    const recommendationType = $('#recommendationType').val();
+    const numRecommendations = $('#numRecommendations').val();
+    
+    // 发送请求获取推荐
+    $.ajax({
+        url: '/recommendation/get_recommendations',
+        type: 'GET',
+        data: {
+            type: recommendationType,
+            n: numRecommendations
+        },
+        success: function(response) {
+            if (response.success) {
+                displayRecommendations(response.recommendations);
+            } else {
+                $('#recommendationsContainer').html('<div class="col-12 text-center py-5">获取推荐失败</div>');
+            }
+        },
+        error: function() {
+            $('#recommendationsContainer').html('<div class="col-12 text-center py-5">获取推荐失败</div>');
+        }
+    });
+}
+
+// 显示推荐结果
+function displayRecommendations(recommendations) {
+    let html = '';
+    
+    if (recommendations.length === 0) {
+        html = '<div class="col-12 text-center py-5">暂无推荐产品</div>';
+    } else {
+        recommendations.forEach(function(item, index) {
+            html += `
+            <div class="col-md-4 mb-4">
+                <div class="card h-100" data-product-id="${item.product_id}">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.product_info.product_name}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${item.product_id}</h6>
+                        <p class="card-text">${item.product_info.description || '暂无描述'}</p>
+                        <p class="card-text"><strong>类别:</strong> ${item.product_info.category}</p>
+                        <p class="card-text"><strong>品牌:</strong> ${item.product_info.brand}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="text-muted">匹配分数: ${item.similarity_score.toFixed(4)}</small><br>
+                                <small class="text-muted">需求预测分数: ${item.demand_forecast_score.toFixed(4)}</small>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-outline-primary like-btn" data-product-id="${item.product_id}">喜欢</button>
+                                <button class="btn btn-sm btn-outline-secondary view-btn" data-product-id="${item.product_id}">查看</button>
+                                <button class="btn btn-sm btn-outline-success cart-btn" data-product-id="${item.product_id}">加入购物车</button>
+                                <button class="btn btn-sm btn-outline-danger feedback-btn" data-product-id="${item.product_id}" data-recommendation-id="${index + 1}">反馈</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+    }
+    
+    $('#recommendationsContainer').html(html);
+    
+    // 绑定按钮事件
+    bindRecommendationButtons();
+}
+
+// 加载热门产品
+function loadPopularProducts() {
+    $.ajax({
+        url: '/recommendation/get_popular_products',
+        type: 'GET',
+        data: { n: 6 },
+        success: function(response) {
+            if (response.success) {
+                displayPopularProducts(response.popular_products);
+            }
+        }
+    });
+}
+
+// 显示热门产品
+function displayPopularProducts(products) {
+    let html = '';
+    
+    products.forEach(function(product) {
+        html += `
+        <div class="col-md-2 mb-4">
+            <div class="card h-100" data-product-id="${product.product_id}">
+                <div class="card-body">
+                    <h6 class="card-title">${product.product_info.product_name}</h6>
+                    <p class="card-text"><small>${product.product_id}</small></p>
+                    <p class="card-text"><small class="text-muted">热度: ${product.similarity_score.toFixed(2)}</small></p>
+                    <button class="btn btn-sm btn-outline-primary view-btn" data-product-id="${product.product_id}">查看</button>
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    
+    $('#popularProductsContainer').html(html);
+    
+    // 绑定按钮事件
+    bindRecommendationButtons();
+}
+
+// 绑定推荐按钮事件
+function bindRecommendationButtons() {
+    // 喜欢按钮
+    $('.like-btn').click(function() {
+        const productId = $(this).data('product-id');
+        logInteraction(productId, 'like', 1.5);
+        $(this).removeClass('btn-outline-primary').addClass('btn-primary').text('已喜欢');
+    });
+    
+    // 查看按钮
+    $('.view-btn').click(function() {
+        const productId = $(this).data('product-id');
+        logInteraction(productId, 'view', 0.5);
+        alert(`查看产品: ${productId}`);
+    });
+    
+    // 加入购物车按钮
+    $('.cart-btn').click(function() {
+        const productId = $(this).data('product-id');
+        logInteraction(productId, 'add_to_cart', 2.0);
+        $(this).removeClass('btn-outline-success').addClass('btn-success').text('已加入购物车');
+    });
+    
+    // 反馈按钮
+    $('.feedback-btn').click(function() {
+        const productId = $(this).data('product-id');
+        const recommendationId = $(this).data('recommendation-id');
+        showFeedbackModal(productId, recommendationId);
+    });
+}
+
+// 记录交互
+function logInteraction(productId, interactionType, interactionValue) {
+    $.ajax({
+        url: '/recommendation/log_interaction',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            product_id: productId,
+            interaction_type: interactionType,
+            interaction_value: interactionValue,
+            session_id: 'current_session'
+        }),
+        success: function(response) {
+            if (response.success) {
+                console.log('交互记录成功');
+            }
+        }
+    });
+}
+
+// 显示反馈模态框
+function showFeedbackModal(productId, recommendationId) {
+    const feedback = prompt('请反馈您对该推荐的看法: (relevant/irrelevant/purchased)', 'relevant');
+    if (feedback) {
+        submitFeedback(recommendationId, feedback);
+    }
+}
+
+// 提交反馈
+function submitFeedback(recommendationId, feedbackType) {
+    $.ajax({
+        url: '/recommendation/submit_feedback',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            recommendation_id: recommendationId,
+            feedback_type: feedbackType
+        }),
+        success: function(response) {
+            if (response.success) {
+                alert('反馈提交成功，感谢您的参与！');
+            }
+        },
+        error: function() {
+            alert('反馈提交失败');
+        }
+    });
+}
+</script>
+{% endblock %}

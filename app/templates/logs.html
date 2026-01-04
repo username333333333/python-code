@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}日志查看{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>日志查看</h2>
+
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    {% if message %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+
+    <!-- 日志筛选和控制 -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="GET" action="{{ url_for('log_view.index') }}" class="row g-3">
+                <div class="col-md-3">
+                    <label for="lines" class="form-label">显示行数</label>
+                    <select class="form-select" id="lines" name="lines">
+                        <option value="50" {% if lines==50 %}selected{% endif %}>50行</option>
+                        <option value="100" {% if lines==100 %}selected{% endif %}>100行</option>
+                        <option value="200" {% if lines==200 %}selected{% endif %}>200行</option>
+                        <option value="500" {% if lines==500 %}selected{% endif %}>500行</option>
+                        <option value="1000" {% if lines==1000 %}selected{% endif %}>1000行</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="search" class="form-label">搜索关键词</label>
+                    <input type="text" class="form-control" id="search" name="search" placeholder="输入搜索关键词"
+                        value="{{ search }}">
+                </div>
+
+                <div class="col-md-3 align-self-end">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">查看日志</button>
+                        <a href="{{ url_for('log_view.clear_logs') }}" class="btn btn-danger"
+                            onclick="return confirm('确定要清空日志吗？此操作不可恢复。')">清空日志</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 日志内容 -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">日志内容</h5>
+        </div>
+        <div class="card-body">
+            <pre class="bg-light p-3 rounded overflow-auto" style="max-height: 600px;">
+{% for log in logs %}{{ log.rstrip() }}
+{% endfor %}
+            </pre>
+        </div>
+        <div class="card-footer text-muted">
+            显示了 {{ logs|length }} 行日志
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 页面加载时初始化
+    document.addEventListener('DOMContentLoaded', function () {
+        // 为搜索框添加回车提交功能
+        const searchInput = document.getElementById('search');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.form.submit();
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

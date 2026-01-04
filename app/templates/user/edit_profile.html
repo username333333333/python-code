@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}编辑个人资料{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="mt-4">编辑个人资料</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ url_for('user_profile.profile') }}">个人资料</a></li>
+            <li class="breadcrumb-item active">编辑个人资料</li>
+        </ol>
+        
+        <!-- 消息提示 -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <!-- 编辑资料表单 -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-pencil-fill me-1"></i> 编辑基本信息
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="{{ url_for('user_profile.edit_profile') }}">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="username" value="{{ current_user.username }}" disabled>
+                                <div class="form-text">用户名不可修改</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="nickname" class="form-label">昵称</label>
+                                <input type="text" class="form-control" id="nickname" name="nickname" value="{{ current_user.nickname or '' }}" placeholder="请输入昵称" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="email" class="form-label">邮箱</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ current_user.email }}" placeholder="请输入邮箱" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="avatar" class="form-label">头像URL</label>
+                                <input type="text" class="form-control" id="avatar" name="avatar" value="{{ current_user.avatar or '' }}" placeholder="请输入头像URL（可选）">
+                                <div class="form-text">建议使用正方形图片，尺寸不小于200x200像素</div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save-fill me-1"></i> 保存修改
+                            </button>
+                            <a href="{{ url_for('user_profile.profile') }}" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left me-1"></i> 取消
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

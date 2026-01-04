@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}我的收藏夹{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="mt-4">我的收藏夹</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{{ url_for('user_profile.profile') }}">个人资料</a></li>
+            <li class="breadcrumb-item active">我的收藏夹</li>
+        </ol>
+        
+        <!-- 消息提示 -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <!-- 筛选条件 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="bi bi-filter me-1"></i> 筛选条件
+            </div>
+            <div class="card-body">
+                <form id="filter-form" method="GET" action="{{ url_for('user_profile.favorites') }}">
+                    <div class="row g-3">
+                        <!-- 收藏类型筛选 -->
+                        <div class="col-md-3">
+                            <label for="favorite-type" class="form-label">收藏类型</label>
+                            <select class="form-select" id="favorite-type" name="favorite_type">
+                                <option value="">全部类型</option>
+                                <option value="query" {% if request.args.get('favorite_type') == 'query' %}selected{% endif %}>数据查询</option>
+                                <option value="recommendation" {% if request.args.get('favorite_type') == 'recommendation' %}selected{% endif %}>旅游推荐</option>
+                                <option value="prediction" {% if request.args.get('favorite_type') == 'prediction' %}selected{% endif %}>天气预测</option>
+                            </select>
+                        </div>
+                        <!-- 搜索框 -->
+                        <div class="col-md-3">
+                            <label for="search" class="form-label">搜索收藏</label>
+                            <input type="text" class="form-control" id="search" name="search" placeholder="输入收藏名称" value="{{ request.args.get('search', '') }}">
+                        </div>
+                        <!-- 开始日期 -->
+                        <div class="col-md-3">
+                            <label for="start-date" class="form-label">开始日期</label>
+                            <input type="date" class="form-control" id="start-date" name="start_date" value="{{ request.args.get('start_date', '') }}">
+                        </div>
+                        <!-- 结束日期 -->
+                        <div class="col-md-3">
+                            <label for="end-date" class="form-label">结束日期</label>
+                            <input type="date" class="form-control" id="end-date" name="end_date" value="{{ request.args.get('end_date', '') }}">
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-primary me-2">
+                            <i class="bi bi-search me-1"></i> 搜索
+                        </button>
+                        <a href="{{ url_for('user_profile.favorites') }}" class="btn btn-secondary">
+                            <i class="bi bi-x-circle me-1"></i> 重置
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 收藏夹列表 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="bi bi-star-fill me-1"></i> 收藏列表
+            </div>
+            <div class="card-body">
+                <table id="favoritesTable" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>收藏名称</th>
+                            <th>收藏类型</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if pagination.items %}
+                            {% for favorite in pagination.items %}
+                            <tr>
+                                <td>{{ favorite.name }}</td>
+                                <td>
+                                    {% if favorite.favorite_type == 'query' %}
+                                        <span class="badge bg-primary">数据查询</span>
+                                    {% elif favorite.favorite_type == 'recommendation' %}
+                                        <span class="badge bg-success">旅游推荐</span>
+                                    {% elif favorite.favorite_type == 'prediction' %}
+                                        <span class="badge bg-info">天气预测</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">{{ favorite.favorite_type }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ favorite.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>
+                                    <a href="{{ url_for('user_profile.favorite_detail', favorite_id=favorite.id) }}" class="btn btn-sm btn-info me-1">
+                                        <i class="bi bi-eye-fill me-1"></i> 查看详情
+                                    </a>
+                                    <a href="{{ url_for('user_profile.delete_favorite', favorite_id=favorite.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('确定要删除该收藏吗？')">
+                                        <i class="bi bi-trash-fill me-1"></i> 删除
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center">暂无收藏记录</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                
+                <!-- 分页导航 -->
+                {% if pagination.pages > 1 %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+                            <a class="page-link" href="{{ url_for('user_profile.favorites', page=pagination.prev_num, **request.args) if pagination.has_prev else '#' }}" tabindex="-1" aria-disabled="{{ not pagination.has_prev }}">
+                                上一页
+                            </a>
+                        </li>
+                        
+                        {% for page_num in pagination.iter_pages(left_edge=2, right_edge=2, left_current=2, right_current=2) %}
+                            {% if page_num %}
+                                <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                                    <a class="page-link" href="{{ url_for('user_profile.favorites', page=page_num, **request.args) }}">{{ page_num }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+                            <a class="page-link" href="{{ url_for('user_profile.favorites', page=pagination.next_num, **request.args) if pagination.has_next else '#' }}">
+                                下一页
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

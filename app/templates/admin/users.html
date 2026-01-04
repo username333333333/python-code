@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}用户管理{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="mt-4">用户管理</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">用户管理</li>
+    </ol>
+
+    <!-- 消息提示 -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- 用户列表 -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            用户列表
+        </div>
+        <div class="card-body">
+            <table id="userTable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>用户名</th>
+                        <th>邮箱</th>
+                        <th>角色</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.is_admin() %}
+                            <span class="badge bg-danger">管理员</span>
+                            {% else %}
+                            <span class="badge bg-primary">普通用户</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.is_active %}
+                            <span class="badge bg-success">激活</span>
+                            {% else %}
+                            <span class="badge bg-secondary">停用</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ user.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>
+                            <!-- 激活/停用按钮 -->
+                            {% if user.is_active %}
+                            <a href="{{ url_for('user_management.deactivate_user', user_id=user.id) }}"
+                                class="btn btn-sm btn-warning mb-1" onclick="return confirm('确定要停用该用户吗？')">
+                                停用
+                            </a>
+                            {% else %}
+                            <a href="{{ url_for('user_management.activate_user', user_id=user.id) }}"
+                                class="btn btn-sm btn-success mb-1">
+                                激活
+                            </a>
+                            {% endif %}
+
+                            <!-- 角色管理按钮已移除 -->
+                            <!-- 由于管理员和普通用户现已分离为不同表，不再支持直接提升/降级 -->
+
+                            <!-- 删除按钮 -->
+                            <a href="{{ url_for('user_management.delete_user', user_id=user.id) }}"
+                                class="btn btn-sm btn-danger" onclick="return confirm('确定要删除该用户吗？此操作不可恢复！')">
+                                删除
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

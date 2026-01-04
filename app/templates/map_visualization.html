@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}辽宁地图可视化{% endblock %}
+
+{% block styles %}
+<style>
+    /* 地图容器高度设置 */
+    .chart-container {
+        height: 500px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">辽宁省地图可视化</h2>
+
+    <!-- 选项卡切换 -->
+    <ul class="nav nav-tabs mb-4" id="mapTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if map_type != 'future' %}active{% endif %}" id="history-tab"
+                data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab" aria-controls="history"
+                aria-selected="true">历史地图可视化</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link {% if map_type == 'future' %}active{% endif %}" id="future-tab" data-bs-toggle="tab"
+                data-bs-target="#future" type="button" role="tab" aria-controls="future"
+                aria-selected="false">未来天气地图可视化</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="mapTabsContent">
+        <!-- 历史地图可视化 -->
+        <div class="tab-pane fade {% if map_type != 'future' %}show active{% endif %}" id="history" role="tabpanel"
+            aria-labelledby="history-tab">
+            <div class="filter-card">
+                <form method="get" class="row g-3">
+                    <input type="hidden" name="type" value="history">
+                    <div class="col-md-4">
+                        <label class="form-label">开始日期</label>
+                        <input type="date" name="start_date" class="form-control" value="{{ filters.date_range[0] }}">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">结束日期</label>
+                        <input type="date" name="end_date" class="form-control" value="{{ filters.date_range[1] }}">
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary">筛选</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-title">辽宁平均气温地图</div>
+                    <div class="chart-container" id="map-temp"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-title">辽宁平均风力地图</div>
+                    <div class="chart-container" id="map-wind"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 未来天气地图可视化 -->
+        <div class="tab-pane fade {% if map_type == 'future' %}show active{% endif %}" id="future" role="tabpanel"
+            aria-labelledby="future-tab">
+            <div class="filter-card">
+                <form method="get" class="row g-3">
+                    <input type="hidden" name="type" value="future">
+                    <div class="col-md-4">
+                        <label class="form-label">预测天数</label>
+                        <select name="days" class="form-select">
+                            <option value="3" {% if days==3 %}selected{% endif %}>3天</option>
+                            <option value="7" {% if days==7 %}selected{% endif %}>7天</option>
+                            <option value="14" {% if days==14 %}selected{% endif %}>14天</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary">获取预测</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-title">辽宁未来平均气温地图</div>
+                    <div class="chart-container" id="map-future-temp"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-title">辽宁未来平均风力地图</div>
+                    <div class="chart-container" id="map-future-wind"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/echarts.min.js') }}"></script>
+<script>
+    // 通用渲染函数，注册地图并渲染图表
+    function renderMapChart(id, chartData, mapName = 'liaoning') {
+        const dom = document.getElementById(id);
+        const chart = echarts.init(dom);
+        if (!chartData) {
+            dom.innerHTML = '<div style="color:red;">无图表数据</div>';
+            return;
+        }
+
+        fetch("{{ url_for('static', filename='js/liaoning.json') }}")
+            .then(response => {
+                if (!response.ok) throw new Error('地图文件加载失败: ' + response.status);
+                return response.json();
+            })
+            .then(geoJson => {
+                try {
+                    echarts.registerMap(mapName, geoJson);
+                    const option = typeof chartData === 'string' ? JSON.parse(chartData) : chartData;
+
+                    // ✅ 强制设置 map 为 "liaoning" 以避免 regions 读取错误
+                    if (option.series) {
+                        option.series.forEach(s => {
+                            if (s.type === 'map') {
+                                s.map = mapName;
+                            }
+                        });
+                    }
+                    if (option.geo) {
+                        option.geo.map = mapName;
+                    }
+
+                    chart.setOption(option);
+                    window.addEventListener('resize', () => chart.resize());
+                } catch (err) {
+                    dom.innerHTML = '<div style="color:red;">图表渲染失败：' + err.message + '</div>';
+                    console.error(err);
+                }
+            })
+            .catch(err => {
+                console.error("地图加载失败：", err);
+                dom.innerHTML = '<div style="color:red;">地图加载失败，请检查 static/js/liaoning.json 是否存在或格式是否正确</div>';
+            });
+    }
+
+    // 渲染历史地图图表
+    renderMapChart('map-temp', {{ charts.map_temp | safe if charts and 'map_temp' in charts else 'null' }});
+    renderMapChart('map-wind', {{ charts.map_wind | safe if charts and 'map_wind' in charts else 'null' }});
+
+    // 渲染未来天气地图图表
+    renderMapChart('map-future-temp', {{ charts.map_future_temp | safe if charts and 'map_future_temp' in charts else 'null' }});
+    renderMapChart('map-future-wind', {{ charts.map_future_wind | safe if charts and 'map_future_wind' in charts else 'null' }});
+</script>
+{% endblock %}

@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% block title %}可视化分析 - 辽宁省智慧旅游系统{% endblock %}
+
+{% block styles %}
+<style>
+    /* 图表容器样式，确保有固定高度 */
+    .chart-container {
+        height: 400px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        margin: 0 auto;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    /* 图表标题样式 */
+    .chart-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #333;
+        margin: 1.5rem 0 1rem 0;
+        padding-left: 0.5rem;
+        border-left: 4px solid #0d6efd;
+    }
+
+    /* 筛选表单样式 */
+    .filter-form {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    /* 无数据提示样式 */
+    .no-data-alert {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        border: none;
+    }
+
+    /* 加载指示器样式 */
+    .loading-indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">旅游数据可视化分析</h2>
+
+    <!-- 历史数据分析 -->
+    <!-- 筛选表单 -->
+    <div class="filter-form">
+        <form method="get" action="{{ url_for('visualizations.dashboard') }}">
+            <input type="hidden" name="data_type" value="history">
+
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label for="history_city" class="form-label">选择城市</label>
+                    <select name="city" id="history_city" class="form-select">
+                        {% for city_name in cities %}
+                        <option value="{{ city_name }}" {% if city==city_name %}selected{% endif %}>{{ city_name
+                            }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="start_date" class="form-label">开始日期</label>
+                    <input type="date" name="start_date" id="start_date" class="form-control"
+                        value="{{ filters.start_date }}">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="end_date" class="form-label">结束日期</label>
+                    <input type="date" name="end_date" id="end_date" class="form-control"
+                        value="{{ filters.end_date }}">
+                </div>
+
+                <div class="col-md-3">
+                    <label for="chart_type" class="form-label">图表类型</label>
+                    <select name="chart_type" id="chart_type" class="form-select">
+                        <option value="all" {% if filters.chart_type=='all' %}selected{% endif %}>全部图表</option>
+                        <option value="temp_line" {% if filters.chart_type=='temp_line' %}selected{% endif %}>
+                            温度变化</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> 查询数据
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- 历史数据分析图表 -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-title">历史温度变化</div>
+            <div class="chart-container" id="temp-line-chart">
+                {% if not charts.temp_line %}
+                <div class="no-data-alert alert alert-warning">暂无温度变化数据</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="chart-title">天气频率统计</div>
+            <div class="chart-container" id="weather-bar-chart">
+                {% if not charts.weather_bar %}
+                <div class="no-data-alert alert alert-warning">暂无天气频率数据</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-title">风力分布</div>
+            <div class="chart-container" id="wind-scatter-chart">
+                {% if not charts.wind_scatter %}
+                <div class="no-data-alert alert alert-warning">暂无风力分布数据</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="chart-title">白天天气状况分布</div>
+            <div class="chart-container" id="weather-day-pie-chart">
+                {% if not charts.weather_day_pie %}
+                <div class="no-data-alert alert alert-warning">暂无白天天气状况数据</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-title">夜间天气状况分布</div>
+            <div class="chart-container" id="weather-night-pie-chart">
+                {% if not charts.weather_night_pie %}
+                <div class="no-data-alert alert alert-warning">暂无夜间天气状况数据</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="chart-title">白天风向分布</div>
+            <div class="chart-container" id="wind-day-rose-chart">
+                {% if not charts.wind_day_rose %}
+                <div class="no-data-alert alert alert-warning">暂无白天风向数据</div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-title">夜间风向分布</div>
+            <div class="chart-container" id="wind-night-rose-chart">
+                {% if not charts.wind_night_rose %}
+                <div class="no-data-alert alert alert-warning">暂无夜间风向数据</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="chart-title">温度热力图</div>
+            <div class="chart-container" id="temp-heatmap-chart">
+                {% if not charts.temp_heatmap %}
+                <div class="no-data-alert alert alert-warning">暂无温度热力图数据</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // 渲染图表的函数
+    function renderChart(chartId, chartOptions) {
+        const container = document.getElementById(chartId);
+        if (!container || !chartOptions) return;
+
+        // 检查是否已经有图表实例
+        const existingChart = echarts.getInstanceByDom(container);
+        if (existingChart) {
+            existingChart.dispose();
+        }
+
+        // 创建新的图表实例
+        const chart = echarts.init(container);
+        chart.setOption(chartOptions);
+
+        // 响应式调整
+        window.addEventListener('resize', function () {
+            chart.resize();
+        });
+    }
+
+    // 初始化图表
+    function initCharts() {
+        // 图表数据来自后端传递的charts变量
+        const chartOptions = {
+            temp_line: {% if charts.temp_line %}{{ charts.temp_line | safe }}{% else %}null{% endif %},
+            weather_bar: {% if charts.weather_bar %}{{ charts.weather_bar | safe }}{% else %}null{% endif %},
+            wind_scatter: {% if charts.wind_scatter %}{{ charts.wind_scatter | safe }}{% else %}null{% endif %},
+            weather_day_pie: {% if charts.weather_day_pie %}{{ charts.weather_day_pie | safe }}{% else %}null{% endif %},
+            weather_night_pie: {% if charts.weather_night_pie %}{{ charts.weather_night_pie | safe }}{% else %}null{% endif %},
+            wind_day_rose: {% if charts.wind_day_rose %}{{ charts.wind_day_rose | safe }}{% else %}null{% endif %},
+            wind_night_rose: {% if charts.wind_night_rose %}{{ charts.wind_night_rose | safe }}{% else %}null{% endif %},
+            temp_heatmap: {% if charts.temp_heatmap %}{{ charts.temp_heatmap | safe }}{% else %}null{% endif %}
+        };
+
+        // 渲染各个图表
+        Object.keys(chartOptions).forEach(chartId => {
+            const options = chartOptions[chartId];
+            if (options) {
+                // 渲染历史数据图表
+                renderChart(chartId.replace(/_/g, '-') + '-chart', options);
+            }
+        });
+    }
+
+    // 页面加载完成后初始化图表
+    document.addEventListener('DOMContentLoaded', function () {
+        initCharts();
+    });
+</script>
+{% endblock %}

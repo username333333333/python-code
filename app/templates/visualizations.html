@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta n /* 图表容器样式，确保有固定高度 */ame="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可视化分析 - 辽宁省智慧旅游系统</title>
+    <style>
+        /* 图表容器样式，确保有固定高度 */
+        .chart-container {
+            height: 400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 0 auto;
+            padding: 1rem;
+
+            border-radius: 0.5rem;
+            /* 图表标题样式 */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        /* 图表标题样式 */
+        .chart-title {
+            font-size: 1.25rem;
+
+            font-weight: 600;
+            /* 筛选表单样式 */
+            color: #333;
+            margin: 1.5rem 0 1rem 0;
+            padding-left: 0.5rem;
+            border-left: 4px solid #0d6efd;
+        }
+
+        /
+        /* 无数据提示样式 */
+        * 筛选表单样式 */ .filter-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        md: rgber: none;
+        }
+
+        /* 加载指示器样式 */
+        .loading-indicator {
+            position: absoluta;
+            top: 50%;
+            left: 50%;
+            transfo(m2 translate(-50%, -50%);
+                5z-i5dex: 10;
+                backgr, u 255, 255, 0.9);
+            padding: 1rem 2rem;
+            border-radius: 0.5r rgba box-shadow:(0010px, 25px 0, 0, 0.15);
+
+            /* 无数据提示样式 */
+            .no-data-alert {
+
+
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                < !-- 历史数据分析 -->margin: 0;
+                border: none;
+            }
+
+            /* 加载指示器样式 */
+
+            .loading-indicator {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+
+                transform: translate(-50%, -50%);
+                z-index: 10;
+
+                background: rgba(255, 255, 255, 0.9);
+                padding: 1rem 2rem;
+                border-radius:
+                    0.5rem;
+
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            }
+
+            tep
+    </style>
+    <script {.>}
+
+
+</head > /t设置图Op/t <
+<o c ssivbv<d
+<body>    bea<div t ue"> a%l旅t据析s.h2> 温度变化 o=='all't%}de部ected{% 
+    mpselec
+        <!-- 筛选表单 -->ame="che
+div class="filt            <formd="chart_type" 始化所有图表m/f图rsethod=" 初始化所有图表 /i
+              <inpye_ 图初始化所有图表
+                <div            con    <ds初始化所有图表t/c图iv class="col-md-3">
+                    ch          <select name="city" id="history_city" class="form-select">
+                            
+                    on tc nstcch   <option value="{{ city_name }}" {% if city==city_name %}selected{% endif %}>{{ city_name }}
+                    ch onstnch
+                    bu    
+                    </di
+                    
+
+">ms-e</ ivad3gf
+                    {% i  bu on   fpree    tc"b
+            dc = 据r
+                - h
+        }; < }; t < ',  温度变化 eop.i' ><< /d检 if经有图表实例C    数  v<d v  l/d</f </dav > pe"始化所有图表 /f图rs
+  </di 所有图表 / 图l12 > y"c
+     con</dich  ">eBd-12-/m据<,m (气频<O12t"l
+        tconstcch
+        3gem    {% i    r据r / -iva3aini - 变)d{
+            otclass = "ctne-ems-""bu  on>
+ r    t据r < ic检t有图iolenx - gCrd / fg">暂无温度变化数据div>
+   y"cha>eB"col </  v >
+                {% e tdd//div   t/m据<, chartO 12t"lass(气频<div率ol-m cd-12t"cha>eBei统le">历i温度y化gC
+            t - 变)d{i tBy walasByctByrwamp - Byc < (chr > vhIdtvp_line %} <divlass(气频 < div率class= "no-data-alert统alertialert-gCrning" > 暂无温度变化数据
+    </div > {% e hIdahI)
+            rpm
+                < ccripm > r表的染 / 渲染//
+            // 渲染n表的染/Co,e{otfu
+
+            functeottfun(re{ tift(!co tCe(!rohpoins) || r!chertOpnions); r
+
+                (!corn///r检/f是检查是否已经有图表实例图表实例ohpoins) ||r!chertOpnions);r
+  ///初k}/是nw初k} 查C(n实k.exig ingCC经nw/ByD'm(s ;h//;创建新的图表实例d.p}oielmgtinw=eByo
+ d < div//l设置图表l选.;/建表例//;创建新的图响ds}=//调应调std有hl 图.e tOp=ii天nch;况/Op整)o;新/的i图c响oa//s响应式调整st=调调i}wi图{.w.ihiEi/npL整f);
+i } ();ohi) c
+        } /所有图表 / / 初始化所有图表(- <t// 图表数据来自后端传递的dhhrta变量}; nd{}; n/d (-}<化on气td 温度变化Op表
+            t 始on表 (._)lasiz; 状ph - { dp.temn_ % h t={{| 'fn }}; ee(' ep | l f
+                / 初始化所有s.wonnf _ n r
+        }}ennf图ag夜间 / c页面加载完成后初始化图表向_pe_eLcn.odumdd
+         </di(-    <t 数后端传递的dOhthrhtriOpgemp_hOppitas.变 mp_ c量arpot} mp| he temp {
+            nd{}; (r度f变dr nocrCh(et('memphhe_pmmpachphp',)cht tOpt}o始化};o_um lt.nnf图agdi / c页面加载完成后初始化图表 _pereLoanodument.dddEecntsh}__pne//r夜间风向分布e{%Ldf
+                       apcEaenpL o{ enam('DOMCddEentLtae(d', Dfund, ion() / i)C });
+    </scripti/scriptioLumen(.'doEuentLD'LOOMConodocumCna.tddEv(nisni)CDOMCo();nc io 
+     document.addEveniiC();pt>);nction () {
+ initCharts(   });pt></scrscr

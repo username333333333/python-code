@@ -1,28 +1,41 @@
-# Python_pycache__/.py[cod]*$py.class
-
-# Flaskenv/nv/lask_env/.env
-.env
-
-# Logs
-logs/.log
-
-# Dataata/cache/ata/itinerary/
-
-# Maps
-*.html
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 
 # IDE
-.vscode/.swp
+.idea/
+.vscode/
+*.swp
 *.swo
 *~
+
+# Data
+*.db
+*.sqlite3
+instance/
+data/cache/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
 
 # OS
 .DS_Store
 Thumbs.db
 
 # Testing
-.test/
+.pytest_cache/
+.coverage
 
-# Temporary
-*.tmp
-*.temp
+# Production
+build/
+dist/
+*.egg-info/
+
+# Render
