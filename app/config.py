@@ -21,8 +21,8 @@ class Config:
     if not weather_data_files:
         raise RuntimeError(f"数据目录中没有找到天气数据文件: {DATA_DIR}")
     
-    # 数据库配置 - MySQL
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'mysql+pymysql://root:123456@localhost/biyedesign'
+    # 数据库配置 - SQLite
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'sqlite:///{BASE_DIR}/app.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # 日志配置
@@ -30,7 +30,7 @@ class Config:
     LOG_FILE = LOG_DIR / 'app.log'
     
     # 预测服务配置
-    PREDICTION_SERVICE_TYPE = os.environ.get('PREDICTION_SERVICE_TYPE') or 'spark'  # sklearn or spark
+    PREDICTION_SERVICE_TYPE = os.environ.get('PREDICTION_SERVICE_TYPE') or 'sklearn'  # sklearn or spark
 
     @classmethod
     def create_dirs(cls):
