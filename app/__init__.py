@@ -75,33 +75,33 @@ def create_app(config_class=Config):
         db.create_all()
         
         # 预加载和缓存数据，优化应用性能
-    # 只在首次启动时执行预加载，避免调试模式重启时重复执行
-    if not hasattr(app, '_preloaded'):
-        print("开始预加载和缓存数据...")
-        import sys
-        import os
-        
-        # 将项目根目录添加到Python路径
-        sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-        
-        try:
-            from scripts.optimize_loading import optimize_data_loader, optimize_prediction_models, optimize_recommendation_service
-            
-            # 预加载所有城市数据
-            optimize_data_loader()
-            
-            # 预训练所有城市的预测模型
-            optimize_prediction_models()
-            
-            # 预加载推荐服务数据
-            optimize_recommendation_service()
-            
-            print("数据预加载和缓存完成！")
-            # 标记为已预加载
-            app._preloaded = True
-        except Exception as e:
-            print(f"数据预加载和缓存过程中出现错误: {e}")
-            import traceback
-            traceback.print_exc()
+    # 注释掉数据预加载，避免初始化时出错
+    # if not hasattr(app, '_preloaded'):
+    #     print("开始预加载和缓存数据...")
+    #     import sys
+    #     import os
+    #     
+    #     # 将项目根目录添加到Python路径
+    #     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    #     
+    #     try:
+    #         from scripts.optimize_loading import optimize_data_loader, optimize_prediction_models, optimize_recommendation_service
+    #         
+    #         # 预加载所有城市数据
+    #         optimize_data_loader()
+    #         
+    #         # 预训练所有城市的预测模型
+    #         optimize_prediction_models()
+    #         
+    #         # 预加载推荐服务数据
+    #         optimize_recommendation_service()
+    #         
+    #         print("数据预加载和缓存完成！")
+    #         # 标记为已预加载
+    #         app._preloaded = True
+    #     except Exception as e:
+    #         print(f"数据预加载和缓存过程中出现错误: {e}")
+    #         import traceback
+    #         traceback.print_exc()
 
     return app
