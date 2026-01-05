@@ -24,6 +24,14 @@ class Config:
     # 数据库配置 - SQLite
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'sqlite:///{BASE_DIR}/app.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+    # 数据库连接池配置
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_size': 5,  # 连接池大小
+        'max_overflow': 10,  # 最大溢出连接数
+        'pool_timeout': 30,  # 连接超时时间（秒）
+        'pool_recycle': 3600,  # 连接回收时间（秒）
+    }
 
     # 日志配置
     LOG_DIR = BASE_DIR / 'logs'
