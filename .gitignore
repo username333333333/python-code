@@ -38,4 +38,7 @@ build/
 dist/
 *.egg-info/
 
+# Large files
+project_backup.zip
+
 # Render
