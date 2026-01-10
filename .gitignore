@@ -30,6 +30,9 @@ logs/
 .DS_Store
 Thumbs.db
 
+# Backup
+project_backup.zip
+
 # Testing
 .pytest_cache/
 .coverage
