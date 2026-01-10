@@ -408,9 +408,29 @@ class RiskAssessmentService:
         
         # 提取天气因素
         weather = weather_forecast['weather']
+        
+        # 修复温度类型转换问题
         temp = weather_forecast['temperature']
+        # 将温度转换为数字类型
+        if isinstance(temp, str):
+            # 尝试提取数字部分
+            import re
+            temp_match = re.search(r'[-+]?\d+\.?\d*', temp)
+            temp = float(temp_match.group()) if temp_match else 20.0
+        
+        # 将风速转换为数字类型
         wind = weather_forecast['wind']
+        if isinstance(wind, str):
+            import re
+            wind_match = re.search(r'[-+]?\d+\.?\d*', wind)
+            wind = float(wind_match.group()) if wind_match else 0.0
+        
         precipitation = weather_forecast.get('precipitation', 0)
+        # 确保降水量是数字类型
+        if isinstance(precipitation, str):
+            import re
+            precip_match = re.search(r'[-+]?\d+\.?\d*', precipitation)
+            precipitation = float(precip_match.group()) if precip_match else 0.0
         
         # 评估风险
         assessed_risks = []

@@ -369,5 +369,99 @@ def favorite_detail(favorite_id):
         except Exception as e:
             # 如果查询失败，添加错误信息
             content['error'] = f'查询执行失败: {str(e)}'
+    # 如果是天气预测类型的收藏，根据预测条件重新生成预测结果
+    elif favorite.favorite_type == 'prediction':
+        try:
+            from app.services.prediction_service import WeatherPredictionServiceFactory
+            from app.utils.data_loader import load_attractions_data, load_all_city_data
+            import pandas as pd
+            import datetime
+            from flask import current_app
+            
+            # 构建预测条件
+            filters = {}
+            if content.get('filters'):
+                # 新版收藏格式，content包含filters字段
+                filters['city'] = content['filters'].get('city', '')
+                filters['days'] = content['filters'].get('days', '7')
+            else:
+                # 旧版收藏格式，content直接包含预测条件
+                filters['city'] = content.get('city', '')
+                filters['days'] = content.get('days', '7')
+            
+            # 确保city和days有值
+            city = filters['city'] or '全部城市'
+            days = int(filters['days']) if filters['days'] else 7
+            
+            # 加载所有城市的历史天气数据
+            weather_df = load_all_city_data()
+            
+            # 创建预测服务实例
+            prediction_service_factory = WeatherPredictionServiceFactory()
+            prediction_service = prediction_service_factory.create_service(data_dir=current_app.config['DATA_DIR'])
+            
+            # 调用预测服务进行预测
+            try:
+                # 尝试直接预测
+                predictions_df = prediction_service.predict_future(weather_df, city, days)
+            except Exception as e:
+                # 如果预测失败（可能是模型不存在），训练模型后重新预测
+                current_app.logger.error(f"预测失败，尝试训练模型: {e}")
+                prediction_service.train_all_models(weather_df)
+                predictions_df = prediction_service.predict_future(weather_df, city, days)
+            
+            # 将预测结果转换为字典列表
+            predictions = []
+            if not predictions_df.empty:
+                # 确保日期列是datetime类型
+                if not pd.api.types.is_datetime64_any_dtype(predictions_df['日期']):
+                    predictions_df['日期'] = pd.to_datetime(predictions_df['日期'], errors='coerce')
+                
+                # 转换为字典列表
+                predictions = predictions_df.to_dict('records')
+            
+            # 生成基于预测结果的旅游推荐
+            future_recommendations = []
+            if predictions:
+                # 加载景点数据
+                data_dir = current_app.config['DATA_DIR']
+                attractions_df = load_attractions_data(data_dir)
+                
+                for pred in predictions:
+                    pred_date = pred['日期']
+                    date_str = pred_date.strftime('%Y-%m-%d')
+                    
+                    # 获取当天的推荐景点
+                    day_recommendations = []
+                    if not attractions_df.empty:
+                        # 根据天气条件筛选景点
+                        filtered_attractions = attractions_df.copy()
+                        
+                        # 这里可以根据具体需求添加筛选逻辑
+                        # 例如：根据温度、天气状况等推荐适合的景点类型
+                        
+                        # 取前3个景点作为推荐
+                        top_attractions = filtered_attractions.head(3)
+                        for _, attraction in top_attractions.iterrows():
+                            day_recommendations.append({
+                                '景点名称': attraction['景点名称'],
+                                '景点类型': attraction['景点类型'],
+                                '评分': attraction['评分'],
+                                '简介': attraction['简介'],
+                                '最佳季节': attraction['最佳季节'],
+                                '门票价格': attraction['门票价格']
+                            })
+                    
+                    future_recommendations.append({
+                        'date': date_str,
+                        'recommendations': day_recommendations
+                    })
+            
+            # 将预测结果和推荐添加到收藏内容中
+            content['predictions'] = predictions
+            content['future_recommendations'] = future_recommendations
+        except Exception as e:
+            # 如果预测失败，添加错误信息
+            content['error'] = f'预测执行失败: {str(e)}'
     
     return render_template('user/favorite_detail.html', favorite=favorite, content=content)

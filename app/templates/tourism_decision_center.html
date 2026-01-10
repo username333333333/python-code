@@ -236,7 +236,7 @@
                                         <td>{{ city['天气'] or '未知' }}</td>
                                         <td>{{ city['预计客流量'] or '未知' }}</td>
                                         <td>
-                                            <a href="{{ url_for('tourism_decision_center.index', selected_city=city['城市'], travel_date=request.args.get('travel_date', '')) }}"
+                                            <a href="{{ url_for('tourism_decision_center.index', selected_city=city['城市'], travel_date=request.args.get('travel_date', ''), show_recommendations='true') }}"
                                                 class="btn btn-sm btn-primary">选择</a>
                                         </td>
                                     </tr>
@@ -419,7 +419,7 @@
                     </div>
 
                     <!-- 行程结果 -->
-                    <div id="itinerary-result" class="result-section mt-4" style="display: none;"></div>
+                    <div id="itinerary-result" class="result-section mt-4"></div>
                 </div>
             </div>
         </div>
@@ -545,18 +545,52 @@
 
     // 初始化
     document.addEventListener('DOMContentLoaded', function () {
+        console.log('DOM内容加载完成，开始初始化...');
+
         // 初始化行程数据
         initItinerary();
 
-        // 如果已经选择了城市，直接跳转到步骤2
-        {% if selected_city %}
-        currentStep = 2;
-        updateStepDisplay();
-        {% endif %}
+        // 添加调试日志，检查selected_city值
+        console.log('模板渲染的selected_city:', '{% if selected_city %}{{ selected_city }}{% else %}未选择{% endif %}');
+
+        // 检查URL参数中是否包含selected_city，作为双重保险
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlSelectedCity = urlParams.get('selected_city');
+        console.log('URL参数中的selected_city:', urlSelectedCity);
+
+        // 如果已经选择了城市（从模板或URL参数），直接跳转到步骤2
+        const templateSelectedCity = '{% if selected_city %}{{ selected_city }}{% else %}{% endif %}';
+        const hasSelectedCity = templateSelectedCity !== '' || urlSelectedCity;
+        console.log('是否有选择城市:', hasSelectedCity, '模板值:', templateSelectedCity, 'URL值:', urlSelectedCity);
+
+        if (hasSelectedCity) {
+            console.log('检测到selected_city，跳转到步骤2');
+            currentStep = 2;
+            updateStepDisplay();
+            console.log('步骤显示已更新，currentStep:', currentStep);
+        } else {
+            console.log('未检测到selected_city，停留在步骤1');
+        }
 
         // 绑定导航按钮事件
         document.getElementById('prev-btn').addEventListener('click', goToPrevStep);
         document.getElementById('next-btn').addEventListener('click', goToNextStep);
+        console.log('导航按钮事件已绑定');
+
+        // 添加城市选择按钮事件监听，确保点击后能正确跳转
+        console.log('开始绑定城市选择按钮事件');
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            if (btn.textContent.trim() === '选择') {
+                btn.addEventListener('click', function (e) {
+                    console.log('城市选择按钮被点击:', e.target.textContent.trim());
+                    console.log('按钮href属性:', this.getAttribute('href'));
+                    // 城市选择按钮是<a>标签，允许默认跳转行为
+                    // 页面刷新后会通过页面加载时的逻辑跳转到步骤2
+                    console.log('允许城市选择按钮的默认跳转');
+                });
+            }
+        });
+        console.log('城市选择按钮事件绑定完成');
 
         // 绑定"添加到行程"按钮事件
         document.querySelectorAll('.add-to-itinerary').forEach(btn => {
@@ -603,6 +637,11 @@
 
         // 更新按钮状态
         updateButtons();
+
+        // 当切换到行程规划步骤时，更新行程显示
+        if (currentStep === 3) {
+            updateItineraryDisplay();
+        }
     }
 
     // 更新步骤指示器
@@ -623,41 +662,25 @@
     // 行程管理
     let itineraryItems = [];
 
-    // 初始化行程数据
+    // 初始化行程数据 - 每次进入页面时重置行程，只保留当前会话数据
     function initItinerary() {
-        // 检查是否需要重置行程数据
-        const shouldResetItinerary = localStorage.getItem('shouldResetItinerary');
-        if (shouldResetItinerary === 'true') {
-            // 清空行程数据
-            localStorage.removeItem('tourismItinerary');
-            localStorage.setItem('shouldResetItinerary', 'false');
-            itineraryItems = [];
-        } else {
-            // 从localStorage加载行程数据
-            const savedItinerary = localStorage.getItem('tourismItinerary');
-            if (savedItinerary) {
-                itineraryItems = JSON.parse(savedItinerary);
-            }
-        }
+        // 重置行程数据，只保留当前会话的数据
+        itineraryItems = [];
         // 更新行程显示
         updateItineraryDisplay();
     }
 
-    // 重置行程数据
+    // 重置行程数据 - 用于手动清除行程
     function resetItinerary() {
-        localStorage.setItem('shouldResetItinerary', 'true');
-        // 刷新页面以应用重置
-        window.location.reload();
+        itineraryItems = [];
+        updateItineraryDisplay();
+        alert('行程已重置');
     }
 
-    // 页面加载时设置重置标记
-    window.addEventListener('beforeunload', function () {
-        localStorage.setItem('shouldResetItinerary', 'true');
-    });
-
-    // 保存行程数据到localStorage
+    // 保存行程数据 - 只在内存中保存，不持久化到localStorage
     function saveItinerary() {
-        localStorage.setItem('tourismItinerary', JSON.stringify(itineraryItems));
+        // 仅在内存中保存，不持久化，确保会话隔离
+        console.log('行程数据已保存到当前会话:', itineraryItems);
     }
 
     // 添加景点到行程
@@ -1030,6 +1053,7 @@
         const resultDiv = document.getElementById('itinerary-result');
         const itinerary = result.itinerary;
         const budget = result.budget;
+        const mapHtml = result.map_html || '';
 
         if (!itinerary || itinerary.length === 0) {
             resultDiv.innerHTML = '<p class="text-center text-muted">暂无行程数据</p>';
@@ -1108,50 +1132,59 @@
                     <h7>推荐景点：</h7>
                     <div class="mt-2">`;
 
-            for (let j = 0; j < dayPlan.attractions.length; j++) {
-                const attraction = dayPlan.attractions[j];
-                const rating = attraction.rating || '暂无评分';
-                const price = attraction.price || 0;
-
-                html += `
-                <div class="attraction-item">
-                    <div class="d-flex justify-content-between">
-                        <strong>${j + 1}. ${attraction.name}</strong>
-                        <span class="badge bg-secondary">${attraction.city}</span>
-                    </div>
-                    `;
-
-                if (attraction.visit_time) {
-                    html += `<div class="mt-1"><small class="text-primary">推荐参观时间：${attraction.visit_time}</small></div>`;
-                }
-
-                if (attraction.travel_info && j > 0) {
-                    html += `
-                    <div class="mt-1">
-                        <small class="text-info">
-                            交通：${attraction.travel_info.transportation} | 
-                            距离：${attraction.travel_info.distance} | 
-                            预计耗时：${attraction.travel_info.travel_time}
-                        </small>
-                    </div>`;
-                }
-
-                if (dayPlan.risk_assessment && dayPlan.risk_assessment[j]) {
-                    const risk = dayPlan.risk_assessment[j];
-                    let riskColor = 'text-success';
-                    if (risk.risk_level === '中风险') riskColor = 'text-warning';
-                    else if (risk.risk_level === '高风险') riskColor = 'text-danger';
+            if (dayPlan.attractions && dayPlan.attractions.length > 0) {
+                for (let j = 0; j < dayPlan.attractions.length; j++) {
+                    const attraction = dayPlan.attractions[j];
+                    const rating = attraction.rating || '暂无评分';
+                    const price = attraction.price || 0;
 
                     html += `
-                    <div class="mt-1">
-                        <small class="${riskColor}">
-                            风险等级：${risk.risk_level} | 建议：${risk.advice}
-                        </small>
+                    <div class="attraction-item">
+                        <div class="d-flex justify-content-between">
+                            <strong>${j + 1}. ${attraction.name}</strong>
+                            <span class="badge bg-secondary">${attraction.city}</span>
+                        </div>
+                        <div class="mt-1">
+                            <small class="text-muted">
+                                类型：${attraction.type} | 评分：${rating} | 价格：${price}元
+                            </small>
+                        </div>`;
+
+                    // 如果有推荐参观时间
+                    if (attraction.visit_time) {
+                        html += `<div class="mt-1"><small class="text-primary">推荐参观时间：${attraction.visit_time}</small></div>`;
+                    }
+
+                    // 如果有出行信息，显示出行信息
+                    if (attraction.travel_info && j > 0) {
+                        html += `
+                        <div class="mt-1 p-2 bg-light rounded">
+                            <small class="text-muted">
+                                <i class="bi bi-clock"></i> 预计行程：${attraction.travel_info.distance || '0.0公里'}，${attraction.travel_info.transportation || '步行'}，约${attraction.travel_info.travel_time || '0分钟'}
+                            </small>
+                        </div>`;
+                    }
+
+                    // 风险评估
+                    if (dayPlan.risk_assessment && dayPlan.risk_assessment[j]) {
+                        const risk = dayPlan.risk_assessment[j];
+                        let riskColor = 'text-success';
+                        if (risk.risk_level === '中风险') riskColor = 'text-warning';
+                        else if (risk.risk_level === '高风险') riskColor = 'text-danger';
+
+                        html += `
+                        <div class="mt-1">
+                            <small class="${riskColor}">
+                                风险等级：${risk.risk_level} | 建议：${risk.advice}
+                            </small>
+                        </div>`;
+                    }
+
+                    html += `
                     </div>`;
                 }
-
-                html += `<div class="mt-1"><small class="text-muted">类型：${attraction.type} | 评分：${rating} | 价格：${price}元</small></div>`;
-                html += '</div>';
+            } else {
+                html += `<p class="text-center text-muted">当天没有推荐景点</p>`;
             }
 
             html += `
@@ -1269,35 +1302,58 @@
         })
             .then(response => response.json())
             .then(mapResult => {
-                if (mapResult.success) {
-                    // 创建iframe来显示地图HTML
-                    const mapContainer = document.createElement('div');
-                    const iframe = document.createElement('iframe');
-                    iframe.style.width = '100%';
-                    iframe.style.height = '400px';
-                    iframe.style.border = 'none';
-                    iframe.style.borderRadius = '0';
-                    iframe.srcdoc = mapResult.map_html;
-
-                    mapContainer.appendChild(iframe);
-
-                    // 更新地图卡片内容
+                if (mapResult.success && mapResult.map_html) {
+                    // 直接在页面中显示地图HTML，而不是使用iframe
                     const mapCard = document.getElementById('map-card');
                     const mapCardBody = mapCard.querySelector('.card-body');
-                    mapCardBody.innerHTML = '';
-                    mapCardBody.appendChild(mapContainer);
+                    mapCardBody.innerHTML = mapResult.map_html;
+                    mapCardBody.style.padding = '0';
+
+                    // 确保地图容器有足够的高度
+                    const mapContainer = mapCardBody.querySelector('.leaflet-container') || mapCardBody.querySelector('#map-container');
+                    if (mapContainer) {
+                        mapContainer.style.height = '500px';
+                        mapContainer.style.width = '100%';
+                    }
+
+                    // 地图渲染后，触发一次重绘，确保地图正确显示
+                    setTimeout(() => {
+                        // 检查是否存在Leaflet地图实例
+                        if (window.L && mapCardBody.querySelector('.leaflet-container')) {
+                            const mapElements = mapCardBody.querySelectorAll('.leaflet-container');
+                            mapElements.forEach(element => {
+                                try {
+                                    // 强制浏览器重排
+                                    element.offsetHeight;
+
+                                    // 如果是Leaflet地图，调用invalidateSize
+                                    // 尝试获取地图实例
+                                    const mapInstance = window.L.Map.getMap(element);
+                                    if (mapInstance) {
+                                        mapInstance.invalidateSize();
+                                        mapInstance.redraw();
+                                    } else {
+                                        // 如果无法直接获取地图实例，尝试重新初始化地图
+                                        window.L.map(element);
+                                    }
+                                } catch (e) {
+                                    console.error('地图重绘失败:', e);
+                                }
+                            });
+                        }
+                    }, 1000);
                 } else {
                     console.error('地图生成失败:', mapResult.message);
                     const mapCard = document.getElementById('map-card');
                     const mapCardBody = mapCard.querySelector('.card-body');
-                    mapCardBody.innerHTML = '<div class="alert alert-danger p-4">地图生成失败: ' + mapResult.message + '</div>';
+                    mapCardBody.innerHTML = '<div class="alert alert-danger p-4 text-center">地图生成失败: ' + (mapResult.message || '未知错误') + '</div>';
                 }
             })
             .catch(error => {
                 console.error('生成地图时出错:', error);
                 const mapCard = document.getElementById('map-card');
                 const mapCardBody = mapCard.querySelector('.card-body');
-                mapCardBody.innerHTML = '<div class="alert alert-danger p-4">生成地图时出错: ' + error.message + '</div>';
+                mapCardBody.innerHTML = '<div class="alert alert-danger p-4 text-center">生成地图时出错: ' + error.message + '</div>';
             });
     }
 

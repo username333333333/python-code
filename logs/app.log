@@ -4416,3 +4416,1347 @@
 2026-01-03 22:46:20,797 - app - INFO - 管理员登录成功: admin@example.com from 192.168.60.33
 2026-01-03 22:50:13,706 - app - INFO - 管理员登录成功: admin@example.com from 127.0.0.1
 2026-01-03 22:52:18,364 - app - INFO - Application startup
+2026-01-05 00:36:45,105 - app - INFO - Application startup
+2026-01-05 00:36:53,900 - app - INFO - Application startup
+2026-01-05 08:14:00,401 - app - INFO - Application startup
+2026-01-05 10:04:02,161 - app - INFO - Application startup
+2026-01-05 11:07:42,592 - app - INFO - Application startup
+2026-01-05 15:24:42,794 - app - INFO - Application startup
+2026-01-05 17:38:15,621 - app - INFO - Application startup
+2026-01-05 18:38:11,400 - app - INFO - Application startup
+2026-01-05 19:40:25,746 - app - INFO - Application startup
+2026-01-05 19:42:57,558 - app - INFO - Application startup
+2026-01-05 19:43:02,034 - app - INFO - Application startup
+2026-01-05 19:43:20,007 - app - INFO - Application startup
+2026-01-05 23:10:09,031 - app - INFO - Application startup
+2026-01-05 23:10:18,029 - app - INFO - Application startup
+2026-01-05 23:11:00,226 - app - INFO - Application startup
+2026-01-05 23:12:09,191 - app - INFO - Application startup
+2026-01-05 23:16:05,016 - app - INFO - Application startup
+2026-01-05 23:16:09,617 - app - INFO - Application startup
+2026-01-05 23:18:41,461 - app - INFO - Application startup
+2026-01-05 23:18:47,654 - app - INFO - Application startup
+2026-01-05 23:20:15,477 - app - INFO - Application startup
+2026-01-05 23:20:19,589 - app - INFO - Application startup
+2026-01-05 23:27:06,915 - app - INFO - Application startup
+2026-01-05 23:27:12,618 - app - INFO - Application startup
+2026-01-05 23:30:14,164 - app - WARNING - 登录失败: admin@example.com from 127.0.0.1 - 原因: 邮箱不存在
+2026-01-05 23:30:20,148 - app - WARNING - 登录失败: admin@example.com from 127.0.0.1 - 原因: 邮箱不存在
+2026-01-05 23:30:38,780 - app - INFO - 用户登录成功: admin@example.com from 127.0.0.1
+2026-01-05 23:31:06,627 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:31:07,268 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:31:19,906 - app - INFO - Application startup
+2026-01-05 23:31:41,270 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:08,878 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:19,021 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:19,381 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:20,329 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:20,439 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:24,555 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:25,095 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:28,059 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:28,667 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:33,274 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:33,935 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:37,773 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:38,419 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:42,653 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:43,283 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:32:57,601 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:34:30,103 - app - INFO - Application startup
+2026-01-05 23:34:34,192 - app - INFO - Application startup
+2026-01-05 23:34:43,193 - app - INFO - 用户登录成功: admin@example.com from 127.0.0.1
+2026-01-05 23:34:48,050 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:41:21,968 - app - INFO - Application startup
+2026-01-05 23:41:30,199 - app - INFO - Application startup
+2026-01-05 23:42:08,455 - app - INFO - Application startup
+2026-01-05 23:43:33,096 - app - INFO - Application startup
+2026-01-05 23:43:37,126 - app - INFO - Application startup
+2026-01-05 23:44:09,015 - app - INFO - Application startup
+2026-01-05 23:44:09,308 - app - INFO - Application startup
+2026-01-05 23:44:13,417 - app - INFO - Application startup
+2026-01-05 23:44:13,710 - app - INFO - Application startup
+2026-01-05 23:44:17,353 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:45:06,295 - app - INFO - Application startup
+2026-01-05 23:45:07,091 - app - INFO - Application startup
+2026-01-05 23:45:10,592 - app - INFO - Application startup
+2026-01-05 23:45:11,384 - app - INFO - Application startup
+2026-01-05 23:45:18,694 - app - INFO - Application startup
+2026-01-05 23:45:19,024 - app - INFO - Application startup
+2026-01-05 23:45:30,390 - app - INFO - Application startup
+2026-01-05 23:45:31,195 - app - INFO - Application startup
+2026-01-05 23:45:47,943 - app - INFO - Application startup
+2026-01-05 23:45:48,244 - app - INFO - Application startup
+2026-01-05 23:45:52,610 - app - INFO - Application startup
+2026-01-05 23:46:15,591 - app - INFO - Application startup
+2026-01-05 23:46:16,374 - app - INFO - Application startup
+2026-01-05 23:46:46,266 - app - INFO - Application startup
+2026-01-05 23:46:47,082 - app - INFO - Application startup
+2026-01-05 23:46:50,935 - app - INFO - Application startup
+2026-01-05 23:46:51,688 - app - INFO - Application startup
+2026-01-05 23:46:55,648 - app - INFO - Application startup
+2026-01-05 23:46:56,400 - app - INFO - Application startup
+2026-01-05 23:47:04,486 - app - INFO - Application startup
+2026-01-05 23:47:31,106 - app - INFO - Application startup
+2026-01-05 23:47:31,313 - app - INFO - Application startup
+2026-01-05 23:47:40,789 - app - INFO - Application startup
+2026-01-05 23:47:53,386 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:48:25,174 - app - INFO - Application startup
+2026-01-05 23:48:25,307 - app - INFO - Application startup
+2026-01-05 23:48:29,916 - app - INFO - Application startup
+2026-01-05 23:48:29,959 - app - INFO - Application startup
+2026-01-05 23:48:42,953 - app - INFO - Application startup
+2026-01-05 23:49:03,561 - app - INFO - Application startup
+2026-01-05 23:49:03,581 - app - INFO - Application startup
+2026-01-05 23:49:16,390 - app - INFO - Application startup
+2026-01-05 23:49:22,258 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:17,903 - app - INFO - Application startup
+2026-01-05 23:56:17,904 - app - INFO - Application startup
+2026-01-05 23:56:22,722 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:27,910 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:30,375 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:35,241 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:41,840 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:48,388 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:53,186 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:53,775 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:58,886 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:56:59,478 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:57:02,113 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:57:02,722 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:57:05,579 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:57:06,167 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:57:09,654 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:57:10,271 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-05 23:57:30,730 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 00:01:31,591 - app - INFO - Application startup
+2026-01-06 00:01:32,279 - app - INFO - Application startup
+2026-01-06 00:05:43,108 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 00:07:08,802 - app - INFO - Application startup
+2026-01-06 00:07:09,360 - app - INFO - Application startup
+2026-01-06 08:53:56,366 - app - INFO - Application startup
+2026-01-06 08:53:56,571 - app - INFO - Application startup
+2026-01-06 09:07:29,411 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:30,284 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:34,280 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:35,327 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:39,459 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:40,286 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:45,350 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:46,009 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:48,316 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:49,317 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:52,498 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:53,267 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:58,726 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:07:59,674 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:08,196 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:08,835 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:12,668 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:13,222 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:18,883 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:19,433 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:24,254 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:24,739 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:25,426 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:25,804 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:29,641 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:12:30,190 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:23,761 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:24,323 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:27,721 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:28,334 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:32,837 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:33,463 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:36,597 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:37,203 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:41,941 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:42,567 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:44,991 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:15:45,564 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:18:07,030 - app - INFO - Application startup
+2026-01-06 09:18:07,340 - app - INFO - Application startup
+2026-01-06 09:18:27,384 - app - INFO - Application startup
+2026-01-06 09:18:27,613 - app - INFO - Application startup
+2026-01-06 09:18:30,983 - app - INFO - Application startup
+2026-01-06 09:19:02,247 - app - INFO - Application startup
+2026-01-06 09:19:02,462 - app - INFO - Application startup
+2026-01-06 09:19:05,343 - app - INFO - Application startup
+2026-01-06 09:19:25,929 - app - INFO - Application startup
+2026-01-06 09:19:26,146 - app - INFO - Application startup
+2026-01-06 09:19:30,714 - app - INFO - Application startup
+2026-01-06 09:19:30,896 - app - INFO - Application startup
+2026-01-06 09:19:37,721 - app - INFO - Application startup
+2026-01-06 09:19:48,533 - app - INFO - Application startup
+2026-01-06 09:19:48,652 - app - INFO - Application startup
+2026-01-06 09:19:53,325 - app - INFO - Application startup
+2026-01-06 09:19:53,423 - app - INFO - Application startup
+2026-01-06 09:19:57,781 - app - INFO - Application startup
+2026-01-06 09:19:57,861 - app - INFO - Application startup
+2026-01-06 09:20:02,160 - app - INFO - Application startup
+2026-01-06 09:20:02,231 - app - INFO - Application startup
+2026-01-06 09:20:06,218 - app - INFO - Application startup
+2026-01-06 09:20:56,738 - app - INFO - Application startup
+2026-01-06 09:20:56,787 - app - INFO - Application startup
+2026-01-06 09:21:06,230 - app - INFO - Application startup
+2026-01-06 09:21:18,201 - app - INFO - Application startup
+2026-01-06 09:21:18,208 - app - INFO - Application startup
+2026-01-06 09:21:23,529 - app - INFO - Application startup
+2026-01-06 09:21:23,530 - app - INFO - Application startup
+2026-01-06 09:21:28,263 - app - INFO - Application startup
+2026-01-06 09:21:28,265 - app - INFO - Application startup
+2026-01-06 09:21:36,284 - app - INFO - Application startup
+2026-01-06 09:21:36,658 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:22:24,031 - app - INFO - Application startup
+2026-01-06 09:22:24,041 - app - INFO - Application startup
+2026-01-06 09:22:30,648 - app - INFO - Application startup
+2026-01-06 09:22:31,018 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:23:20,741 - app - INFO - Application startup
+2026-01-06 09:23:20,742 - app - INFO - Application startup
+2026-01-06 09:23:26,047 - app - INFO - Application startup
+2026-01-06 09:23:31,074 - app - INFO - Application startup
+2026-01-06 09:23:31,087 - app - INFO - Application startup
+2026-01-06 09:23:35,511 - app - INFO - Application startup
+2026-01-06 09:23:35,532 - app - INFO - Application startup
+2026-01-06 09:23:39,954 - app - INFO - Application startup
+2026-01-06 09:23:39,979 - app - INFO - Application startup
+2026-01-06 09:23:48,685 - app - INFO - Application startup
+2026-01-06 09:24:27,692 - app - INFO - Application startup
+2026-01-06 09:24:27,693 - app - INFO - Application startup
+2026-01-06 09:24:32,623 - app - INFO - Application startup
+2026-01-06 09:24:32,629 - app - INFO - Application startup
+2026-01-06 09:24:37,120 - app - INFO - Application startup
+2026-01-06 09:24:37,128 - app - INFO - Application startup
+2026-01-06 09:24:41,655 - app - INFO - Application startup
+2026-01-06 09:24:41,656 - app - INFO - Application startup
+2026-01-06 09:24:46,332 - app - INFO - Application startup
+2026-01-06 09:24:46,332 - app - INFO - Application startup
+2026-01-06 09:24:55,172 - app - INFO - Application startup
+2026-01-06 09:24:55,741 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 09:25:18,975 - app - INFO - Application startup
+2026-01-06 09:25:23,849 - app - INFO - Application startup
+2026-01-06 09:25:23,872 - app - INFO - Application startup
+2026-01-06 09:25:28,410 - app - INFO - Application startup
+2026-01-06 09:25:32,972 - app - INFO - Application startup
+2026-01-06 09:25:37,766 - app - INFO - Application startup
+2026-01-06 09:25:37,782 - app - INFO - Application startup
+2026-01-06 09:25:42,597 - app - INFO - Application startup
+2026-01-06 09:25:42,604 - app - INFO - Application startup
+2026-01-06 09:26:04,227 - app - INFO - Application startup
+2026-01-06 09:26:19,737 - app - INFO - Application startup
+2026-01-06 09:26:19,779 - app - INFO - Application startup
+2026-01-06 09:26:25,068 - app - INFO - Application startup
+2026-01-06 09:26:25,095 - app - INFO - Application startup
+2026-01-06 09:26:30,225 - app - INFO - Application startup
+2026-01-06 09:26:30,252 - app - INFO - Application startup
+2026-01-06 09:26:35,267 - app - INFO - Application startup
+2026-01-06 09:26:35,272 - app - INFO - Application startup
+2026-01-06 09:26:40,256 - app - INFO - Application startup
+2026-01-06 09:26:40,289 - app - INFO - Application startup
+2026-01-06 11:15:53,928 - app - INFO - Application startup
+2026-01-06 11:16:00,643 - app - INFO - Application startup
+2026-01-06 11:20:50,105 - app - INFO - Application startup
+2026-01-06 11:20:50,132 - app - INFO - Application startup
+2026-01-06 14:27:48,754 - app - INFO - Application startup
+2026-01-06 14:27:54,031 - app - INFO - Application startup
+2026-01-06 16:05:04,124 - app - INFO - Application startup
+2026-01-06 16:05:04,145 - app - INFO - Application startup
+2026-01-06 17:04:57,638 - app - INFO - Application startup
+2026-01-06 19:33:45,351 - app - INFO - Application startup
+2026-01-06 19:33:53,083 - app - INFO - Application startup
+2026-01-06 19:35:18,415 - app - INFO - 用户登录成功: admin@example.com from 192.168.60.33
+2026-01-06 19:35:45,662 - app - INFO - 用户登录成功: admin@example.com from 127.0.0.1
+2026-01-06 19:35:53,605 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:36:11,708 - app - INFO - Application startup
+2026-01-06 19:37:20,960 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:37:21,635 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:37:26,879 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:37:27,566 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:37:31,582 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:37:32,095 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:37:50,332 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:37:53,244 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:39:16,309 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 19:39:16,806 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-06 20:33:24,732 - app - INFO - Application startup
+2026-01-06 21:33:26,369 - app - INFO - Application startup
+2026-01-06 22:33:27,240 - app - INFO - Application startup
+2026-01-06 23:33:28,239 - app - INFO - Application startup
+2026-01-07 00:34:19,272 - app - INFO - Application startup
+2026-01-07 01:34:20,015 - app - INFO - Application startup
+2026-01-09 10:41:09,959 - app - INFO - Application startup
+2026-01-09 10:41:18,502 - app - INFO - Application startup
+2026-01-09 10:41:30,707 - app - INFO - 用户登录成功: admin@example.com from 127.0.0.1
+2026-01-09 10:41:35,264 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 10:41:36,040 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 10:41:41,414 - app - INFO - Application startup
+2026-01-09 10:41:50,926 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 10:42:00,539 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 10:44:31,270 - app - INFO - Application startup
+2026-01-09 10:44:35,316 - app - INFO - Application startup
+2026-01-09 10:44:39,405 - app - INFO - Application startup
+2026-01-09 10:44:43,467 - app - INFO - Application startup
+2026-01-09 10:44:47,531 - app - INFO - Application startup
+2026-01-09 10:45:05,615 - app - INFO - Application startup
+2026-01-09 10:45:31,686 - app - INFO - Application startup
+2026-01-09 10:46:19,895 - app - INFO - Application startup
+2026-01-09 10:46:50,363 - app - INFO - Application startup
+2026-01-09 10:46:54,136 - app - INFO - Application startup
+2026-01-09 10:47:06,104 - app - INFO - Application startup
+2026-01-09 10:47:06,193 - app - INFO - Application startup
+2026-01-09 10:47:10,713 - app - INFO - Application startup
+2026-01-09 10:47:10,810 - app - INFO - Application startup
+2026-01-09 10:47:24,011 - app - INFO - Application startup
+2026-01-09 10:47:26,039 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:01:21,614 - app - INFO - Application startup
+2026-01-09 11:01:21,621 - app - INFO - Application startup
+2026-01-09 11:01:27,100 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:02:02,834 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:02:03,347 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:00,435 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:00,957 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:06,872 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:07,385 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:07,999 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:08,634 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:11,098 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:11,756 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:15:18,910 - app - INFO - Application startup
+2026-01-09 11:15:19,419 - app - INFO - Application startup
+2026-01-09 11:16:06,084 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:16:06,758 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:16:25,165 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:16:25,700 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:26:14,230 - app - INFO - Application startup
+2026-01-09 11:26:18,564 - app - INFO - Application startup
+2026-01-09 11:26:58,634 - app - INFO - Application startup
+2026-01-09 11:26:59,053 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:27:11,846 - app - INFO - Application startup
+2026-01-09 11:36:17,386 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:17,955 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:22,260 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:22,833 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:25,924 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:26,467 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:31,022 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:31,631 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:34,501 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:35,087 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:39,687 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:40,321 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:44,541 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:36:45,294 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:37:19,965 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:37:25,973 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:41:06,683 - app - INFO - Application startup
+2026-01-09 11:41:07,106 - app - INFO - Application startup
+2026-01-09 11:41:07,139 - app - INFO - Application startup
+2026-01-09 11:41:12,938 - app - INFO - Application startup
+2026-01-09 11:41:12,942 - app - INFO - Application startup
+2026-01-09 11:41:12,961 - app - INFO - Application startup
+2026-01-09 11:41:58,753 - app - INFO - Application startup
+2026-01-09 11:41:58,761 - app - INFO - Application startup
+2026-01-09 11:41:58,769 - app - INFO - Application startup
+2026-01-09 11:42:37,014 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:42:51,967 - app - INFO - Application startup
+2026-01-09 11:42:54,222 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:42:54,834 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:42:55,671 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:42:56,432 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:42:57,167 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:43:55,624 - app - INFO - Application startup
+2026-01-09 11:43:55,694 - app - INFO - Application startup
+2026-01-09 11:43:55,711 - app - INFO - Application startup
+2026-01-09 11:46:12,980 - app - INFO - Application startup
+2026-01-09 11:46:13,036 - app - INFO - Application startup
+2026-01-09 11:46:13,055 - app - INFO - Application startup
+2026-01-09 11:51:13,652 - app - INFO - Application startup
+2026-01-09 11:51:13,675 - app - INFO - Application startup
+2026-01-09 11:51:13,680 - app - INFO - Application startup
+2026-01-09 11:56:06,967 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:56:07,495 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:56:10,870 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:56:11,447 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:56:13,620 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:56:14,226 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:56:17,803 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:56:18,390 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 11:56:39,671 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:03:42,924 - app - INFO - Application startup
+2026-01-09 12:03:43,013 - app - INFO - Application startup
+2026-01-09 12:03:43,140 - app - INFO - Application startup
+2026-01-09 12:03:49,921 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:04:04,759 - app - INFO - Application startup
+2026-01-09 12:04:07,072 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:04:07,785 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:04:08,660 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:04:09,457 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:04:10,278 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:19,313 - app - INFO - Application startup
+2026-01-09 12:05:19,357 - app - INFO - Application startup
+2026-01-09 12:05:19,439 - app - INFO - Application startup
+2026-01-09 12:05:23,008 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:23,624 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:27,706 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:28,277 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:31,353 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:31,951 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:34,362 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:34,955 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:38,502 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:39,121 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:05:57,368 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:10:49,211 - app - INFO - Application startup
+2026-01-09 12:13:29,374 - app - INFO - Application startup
+2026-01-09 12:13:29,380 - app - INFO - Application startup
+2026-01-09 12:13:29,729 - app - INFO - Application startup
+2026-01-09 12:13:44,390 - app - INFO - Application startup
+2026-01-09 12:13:45,255 - app - INFO - Application startup
+2026-01-09 12:13:45,274 - app - INFO - Application startup
+2026-01-09 12:14:37,331 - app - INFO - Application startup
+2026-01-09 12:14:37,332 - app - INFO - Application startup
+2026-01-09 12:14:37,460 - app - INFO - Application startup
+2026-01-09 12:14:49,697 - app - INFO - Application startup
+2026-01-09 12:14:49,707 - app - INFO - Application startup
+2026-01-09 12:14:49,721 - app - INFO - Application startup
+2026-01-09 12:14:56,102 - app - INFO - Application startup
+2026-01-09 12:14:56,122 - app - INFO - Application startup
+2026-01-09 12:14:56,125 - app - INFO - Application startup
+2026-01-09 12:15:24,701 - app - INFO - Application startup
+2026-01-09 12:15:39,282 - app - INFO - Application startup
+2026-01-09 12:15:39,319 - app - INFO - Application startup
+2026-01-09 12:15:39,355 - app - INFO - Application startup
+2026-01-09 12:15:51,580 - app - INFO - Application startup
+2026-01-09 12:15:54,881 - app - INFO - Application startup
+2026-01-09 12:16:14,166 - app - INFO - Application startup
+2026-01-09 12:16:26,757 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:18:11,428 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:18:12,040 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:19:10,350 - app - INFO - Application startup
+2026-01-09 12:19:11,219 - app - INFO - Application startup
+2026-01-09 12:19:11,223 - app - INFO - Application startup
+2026-01-09 12:19:25,135 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:17,614 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:18,189 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:21,495 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:22,077 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:24,186 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:24,764 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:28,978 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:29,574 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:40,987 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 12:25:43,178 - app - INFO - Application startup
+2026-01-09 12:25:43,180 - app - INFO - Application startup
+2026-01-09 12:25:43,656 - app - INFO - Application startup
+2026-01-09 12:41:14,218 - app - INFO - Application startup
+2026-01-09 12:41:14,221 - app - INFO - Application startup
+2026-01-09 12:41:14,457 - app - INFO - Application startup
+2026-01-09 12:46:14,024 - app - INFO - Application startup
+2026-01-09 12:46:14,049 - app - INFO - Application startup
+2026-01-09 12:46:14,050 - app - INFO - Application startup
+2026-01-09 13:00:31,475 - app - INFO - Application startup
+2026-01-09 13:00:31,543 - app - INFO - Application startup
+2026-01-09 13:00:31,575 - app - INFO - Application startup
+2026-01-09 13:03:13,140 - app - INFO - Application startup
+2026-01-09 13:03:13,171 - app - INFO - Application startup
+2026-01-09 13:03:13,270 - app - INFO - Application startup
+2026-01-09 13:06:37,809 - app - INFO - Application startup
+2026-01-09 13:06:37,811 - app - INFO - Application startup
+2026-01-09 13:06:37,816 - app - INFO - Application startup
+2026-01-09 13:07:01,250 - app - INFO - Application startup
+2026-01-09 13:07:01,250 - app - INFO - Application startup
+2026-01-09 13:07:01,262 - app - INFO - Application startup
+2026-01-09 13:07:29,911 - app - INFO - Application startup
+2026-01-09 13:07:33,306 - app - INFO - Application startup
+2026-01-09 13:08:12,725 - app - INFO - Application startup
+2026-01-09 13:08:12,727 - app - INFO - Application startup
+2026-01-09 13:08:12,744 - app - INFO - Application startup
+2026-01-09 13:08:17,995 - app - INFO - Application startup
+2026-01-09 13:08:17,998 - app - INFO - Application startup
+2026-01-09 13:08:18,050 - app - INFO - Application startup
+2026-01-09 13:08:22,852 - app - INFO - Application startup
+2026-01-09 13:08:22,865 - app - INFO - Application startup
+2026-01-09 13:08:22,901 - app - INFO - Application startup
+2026-01-09 13:08:27,904 - app - INFO - Application startup
+2026-01-09 13:08:27,945 - app - INFO - Application startup
+2026-01-09 13:08:27,966 - app - INFO - Application startup
+2026-01-09 13:08:36,564 - app - INFO - Application startup
+2026-01-09 13:08:36,700 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 13:15:27,407 - app - INFO - Application startup
+2026-01-09 13:15:27,461 - app - INFO - Application startup
+2026-01-09 13:15:27,482 - app - INFO - Application startup
+2026-01-09 13:45:35,633 - app - INFO - Application startup
+2026-01-09 13:45:35,709 - app - INFO - Application startup
+2026-01-09 13:45:40,283 - app - INFO - Application startup
+2026-01-09 13:50:33,444 - app - INFO - Application startup
+2026-01-09 13:50:33,595 - app - INFO - Application startup
+2026-01-09 13:50:34,071 - app - INFO - Application startup
+2026-01-09 14:00:33,644 - app - INFO - Application startup
+2026-01-09 14:00:34,225 - app - INFO - Application startup
+2026-01-09 14:00:34,320 - app - INFO - Application startup
+2026-01-09 14:04:06,479 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 14:04:07,337 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 14:10:33,700 - app - INFO - Application startup
+2026-01-09 14:10:33,702 - app - INFO - Application startup
+2026-01-09 14:10:34,048 - app - INFO - Application startup
+2026-01-09 14:15:34,536 - app - INFO - Application startup
+2026-01-09 14:15:34,536 - app - INFO - Application startup
+2026-01-09 14:15:34,677 - app - INFO - Application startup
+2026-01-09 16:00:37,725 - app - INFO - Application startup
+2026-01-09 16:00:41,541 - app - INFO - Application startup
+2026-01-09 16:00:41,558 - app - INFO - Application startup
+2026-01-09 16:12:23,170 - app - INFO - Application startup
+2026-01-09 16:12:23,335 - app - INFO - Application startup
+2026-01-09 16:12:23,470 - app - INFO - Application startup
+2026-01-09 16:16:07,026 - app - INFO - Application startup
+2026-01-09 16:16:07,187 - app - INFO - Application startup
+2026-01-09 16:16:07,267 - app - INFO - Application startup
+2026-01-09 16:27:31,593 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:27:31,997 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:27:32,924 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:27:33,049 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:27:50,090 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:27:50,765 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:27:55,114 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:27:55,740 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:28:08,282 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:32:32,901 - app - INFO - Application startup
+2026-01-09 16:32:32,982 - app - INFO - Application startup
+2026-01-09 16:32:33,078 - app - INFO - Application startup
+2026-01-09 16:32:41,254 - app - INFO - Application startup
+2026-01-09 16:32:41,403 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:37:43,117 - app - INFO - Application startup
+2026-01-09 16:37:43,215 - app - INFO - Application startup
+2026-01-09 16:37:44,340 - app - INFO - Application startup
+2026-01-09 16:37:46,708 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:37:47,310 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:37:50,565 - app - INFO - Application startup
+2026-01-09 16:37:50,662 - app - INFO - Application startup
+2026-01-09 16:37:51,275 - app - INFO - Application startup
+2026-01-09 16:37:56,851 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:40:16,212 - app - INFO - Application startup
+2026-01-09 16:40:16,705 - app - INFO - Application startup
+2026-01-09 16:40:17,060 - app - INFO - Application startup
+2026-01-09 16:40:41,906 - app - INFO - Application startup
+2026-01-09 16:40:42,204 - app - INFO - Application startup
+2026-01-09 16:40:42,640 - app - INFO - Application startup
+2026-01-09 16:41:00,541 - app - INFO - Application startup
+2026-01-09 16:41:00,917 - app - INFO - Application startup
+2026-01-09 16:41:01,194 - app - INFO - Application startup
+2026-01-09 16:41:14,676 - app - INFO - Application startup
+2026-01-09 16:41:14,824 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:41:31,694 - app - INFO - Application startup
+2026-01-09 16:41:32,160 - app - INFO - Application startup
+2026-01-09 16:41:32,426 - app - INFO - Application startup
+2026-01-09 16:41:37,113 - app - INFO - Application startup
+2026-01-09 16:41:37,448 - app - INFO - Application startup
+2026-01-09 16:41:37,671 - app - INFO - Application startup
+2026-01-09 16:41:42,128 - app - INFO - Application startup
+2026-01-09 16:41:42,536 - app - INFO - Application startup
+2026-01-09 16:41:42,709 - app - INFO - Application startup
+2026-01-09 16:41:46,964 - app - INFO - Application startup
+2026-01-09 16:41:47,413 - app - INFO - Application startup
+2026-01-09 16:41:47,558 - app - INFO - Application startup
+2026-01-09 16:42:04,971 - app - INFO - Application startup
+2026-01-09 16:42:05,118 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:42:50,096 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:45:46,467 - app - INFO - Application startup
+2026-01-09 16:45:46,950 - app - INFO - Application startup
+2026-01-09 16:45:47,268 - app - INFO - Application startup
+2026-01-09 16:46:04,154 - app - INFO - Application startup
+2026-01-09 16:46:04,295 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:46:47,476 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:49:15,860 - app - INFO - Application startup
+2026-01-09 16:49:15,873 - app - INFO - Application startup
+2026-01-09 16:49:16,134 - app - INFO - Application startup
+2026-01-09 16:49:28,948 - app - INFO - Application startup
+2026-01-09 16:49:28,965 - app - INFO - Application startup
+2026-01-09 16:49:29,126 - app - INFO - Application startup
+2026-01-09 16:49:35,225 - app - INFO - Application startup
+2026-01-09 16:49:35,232 - app - INFO - Application startup
+2026-01-09 16:49:35,396 - app - INFO - Application startup
+2026-01-09 16:49:40,264 - app - INFO - Application startup
+2026-01-09 16:49:40,353 - app - INFO - Application startup
+2026-01-09 16:49:45,267 - app - INFO - Application startup
+2026-01-09 16:49:45,280 - app - INFO - Application startup
+2026-01-09 16:49:45,308 - app - INFO - Application startup
+2026-01-09 16:49:50,350 - app - INFO - Application startup
+2026-01-09 16:49:50,359 - app - INFO - Application startup
+2026-01-09 16:49:50,390 - app - INFO - Application startup
+2026-01-09 16:49:55,428 - app - INFO - Application startup
+2026-01-09 16:49:55,439 - app - INFO - Application startup
+2026-01-09 16:50:21,771 - app - INFO - Application startup
+2026-01-09 16:50:41,377 - app - INFO - Application startup
+2026-01-09 16:50:41,518 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 16:52:14,866 - app - INFO - Application startup
+2026-01-09 16:52:14,867 - app - INFO - Application startup
+2026-01-09 16:52:14,871 - app - INFO - Application startup
+2026-01-09 16:52:21,004 - app - INFO - Application startup
+2026-01-09 16:52:21,014 - app - INFO - Application startup
+2026-01-09 16:52:21,056 - app - INFO - Application startup
+2026-01-09 16:52:26,360 - app - INFO - Application startup
+2026-01-09 16:52:26,370 - app - INFO - Application startup
+2026-01-09 16:52:26,374 - app - INFO - Application startup
+2026-01-09 16:52:31,408 - app - INFO - Application startup
+2026-01-09 16:52:31,426 - app - INFO - Application startup
+2026-01-09 16:52:36,416 - app - INFO - Application startup
+2026-01-09 16:52:36,424 - app - INFO - Application startup
+2026-01-09 16:52:36,435 - app - INFO - Application startup
+2026-01-09 16:52:52,165 - app - INFO - Application startup
+2026-01-09 16:53:32,229 - app - INFO - Application startup
+2026-01-09 16:53:32,390 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:00:35,520 - app - INFO - Application startup
+2026-01-09 17:00:35,526 - app - INFO - Application startup
+2026-01-09 17:07:43,483 - app - INFO - Application startup
+2026-01-09 17:07:43,496 - app - INFO - Application startup
+2026-01-09 17:07:43,506 - app - INFO - Application startup
+2026-01-09 17:07:50,780 - app - INFO - Application startup
+2026-01-09 17:07:50,787 - app - INFO - Application startup
+2026-01-09 17:07:50,788 - app - INFO - Application startup
+2026-01-09 17:07:59,726 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:08:06,186 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:08:20,125 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:13:05,880 - app - INFO - Application startup
+2026-01-09 17:13:05,884 - app - INFO - Application startup
+2026-01-09 17:13:06,066 - app - INFO - Application startup
+2026-01-09 17:13:32,722 - app - INFO - Application startup
+2026-01-09 17:13:32,724 - app - INFO - Application startup
+2026-01-09 17:13:32,832 - app - INFO - Application startup
+2026-01-09 17:13:40,139 - app - INFO - Application startup
+2026-01-09 17:13:40,148 - app - INFO - Application startup
+2026-01-09 17:13:40,201 - app - INFO - Application startup
+2026-01-09 17:13:55,531 - app - INFO - Application startup
+2026-01-09 17:13:55,532 - app - INFO - Application startup
+2026-01-09 17:13:55,550 - app - INFO - Application startup
+2026-01-09 17:14:01,214 - app - INFO - Application startup
+2026-01-09 17:14:01,217 - app - INFO - Application startup
+2026-01-09 17:14:01,236 - app - INFO - Application startup
+2026-01-09 17:14:06,617 - app - INFO - Application startup
+2026-01-09 17:14:06,624 - app - INFO - Application startup
+2026-01-09 17:14:06,625 - app - INFO - Application startup
+2026-01-09 17:14:11,875 - app - INFO - Application startup
+2026-01-09 17:14:11,880 - app - INFO - Application startup
+2026-01-09 17:14:11,911 - app - INFO - Application startup
+2026-01-09 17:14:51,713 - app - INFO - Application startup
+2026-01-09 17:16:16,311 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:16:29,581 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:18:39,906 - app - INFO - Application startup
+2026-01-09 17:18:39,910 - app - INFO - Application startup
+2026-01-09 17:18:39,940 - app - INFO - Application startup
+2026-01-09 17:19:15,838 - app - INFO - Application startup
+2026-01-09 17:20:45,765 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:20:48,187 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:20:48,760 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:20:55,398 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:20:56,042 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:20:58,799 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:20:59,389 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:21:03,746 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:21:04,366 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:21:16,302 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 17:23:42,930 - app - INFO - Application startup
+2026-01-09 17:23:42,992 - app - INFO - Application startup
+2026-01-09 17:23:43,155 - app - INFO - Application startup
+2026-01-09 17:24:05,282 - app - INFO - Application startup
+2026-01-09 17:24:05,335 - app - INFO - Application startup
+2026-01-09 17:24:05,462 - app - INFO - Application startup
+2026-01-09 17:24:30,581 - app - INFO - Application startup
+2026-01-09 17:24:30,664 - app - INFO - Application startup
+2026-01-09 17:24:30,738 - app - INFO - Application startup
+2026-01-09 17:24:50,533 - app - INFO - Application startup
+2026-01-09 17:24:50,547 - app - INFO - Application startup
+2026-01-09 17:24:50,569 - app - INFO - Application startup
+2026-01-09 17:25:44,720 - app - INFO - Application startup
+2026-01-09 17:45:36,787 - app - INFO - Application startup
+2026-01-09 17:45:36,876 - app - INFO - Application startup
+2026-01-09 17:50:35,999 - app - INFO - Application startup
+2026-01-09 17:50:36,005 - app - INFO - Application startup
+2026-01-09 17:50:36,803 - app - INFO - Application startup
+2026-01-09 17:55:36,206 - app - INFO - Application startup
+2026-01-09 17:55:36,208 - app - INFO - Application startup
+2026-01-09 17:55:36,862 - app - INFO - Application startup
+2026-01-09 18:00:36,271 - app - INFO - Application startup
+2026-01-09 18:00:36,280 - app - INFO - Application startup
+2026-01-09 18:00:36,657 - app - INFO - Application startup
+2026-01-09 18:07:42,351 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 18:09:44,094 - app - INFO - Application startup
+2026-01-09 18:09:44,095 - app - INFO - Application startup
+2026-01-09 18:09:44,281 - app - INFO - Application startup
+2026-01-09 18:10:20,830 - app - INFO - Application startup
+2026-01-09 18:15:36,440 - app - INFO - Application startup
+2026-01-09 18:15:36,482 - app - INFO - Application startup
+2026-01-09 18:15:36,564 - app - INFO - Application startup
+2026-01-09 19:07:15,920 - app - INFO - Application startup
+2026-01-09 19:07:16,054 - app - INFO - Application startup
+2026-01-09 19:07:16,272 - app - INFO - Application startup
+2026-01-09 19:09:20,264 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:09:29,950 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:12:11,445 - app - INFO - Application startup
+2026-01-09 19:12:11,471 - app - INFO - Application startup
+2026-01-09 19:12:11,549 - app - INFO - Application startup
+2026-01-09 19:16:21,510 - app - INFO - Application startup
+2026-01-09 19:16:21,515 - app - INFO - Application startup
+2026-01-09 19:16:21,528 - app - INFO - Application startup
+2026-01-09 19:16:32,843 - app - INFO - Application startup
+2026-01-09 19:16:32,880 - app - INFO - Application startup
+2026-01-09 19:16:32,908 - app - INFO - Application startup
+2026-01-09 19:16:48,596 - app - INFO - Application startup
+2026-01-09 19:18:16,209 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:18:31,148 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:24:44,405 - app - INFO - Application startup
+2026-01-09 19:24:44,411 - app - INFO - Application startup
+2026-01-09 19:24:44,413 - app - INFO - Application startup
+2026-01-09 19:26:10,167 - app - INFO - Application startup
+2026-01-09 19:26:10,180 - app - INFO - Application startup
+2026-01-09 19:26:10,201 - app - INFO - Application startup
+2026-01-09 19:26:22,154 - app - INFO - Application startup
+2026-01-09 19:26:22,271 - app - INFO - Application startup
+2026-01-09 19:26:22,274 - app - INFO - Application startup
+2026-01-09 19:26:32,479 - app - INFO - Application startup
+2026-01-09 19:26:34,372 - app - INFO - Application startup
+2026-01-09 19:26:34,398 - app - INFO - Application startup
+2026-01-09 19:26:34,430 - app - INFO - Application startup
+2026-01-09 19:26:47,457 - app - INFO - Application startup
+2026-01-09 19:46:18,492 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:46:26,585 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:50:32,642 - app - INFO - Application startup
+2026-01-09 19:50:32,727 - app - INFO - Application startup
+2026-01-09 19:50:32,804 - app - INFO - Application startup
+2026-01-09 19:52:05,288 - app - INFO - Application startup
+2026-01-09 19:52:05,316 - app - INFO - Application startup
+2026-01-09 19:52:05,338 - app - INFO - Application startup
+2026-01-09 19:52:24,055 - app - INFO - Application startup
+2026-01-09 19:52:37,959 - app - INFO - Application startup
+2026-01-09 19:52:37,983 - app - INFO - Application startup
+2026-01-09 19:52:38,017 - app - INFO - Application startup
+2026-01-09 19:52:43,610 - app - INFO - Application startup
+2026-01-09 19:52:43,625 - app - INFO - Application startup
+2026-01-09 19:52:43,643 - app - INFO - Application startup
+2026-01-09 19:52:49,009 - app - INFO - Application startup
+2026-01-09 19:52:49,012 - app - INFO - Application startup
+2026-01-09 19:52:49,038 - app - INFO - Application startup
+2026-01-09 19:52:54,323 - app - INFO - Application startup
+2026-01-09 19:53:07,598 - app - INFO - Application startup
+2026-01-09 19:54:02,914 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:54:18,810 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:56:32,153 - app - INFO - Application startup
+2026-01-09 19:56:32,157 - app - INFO - Application startup
+2026-01-09 19:56:32,686 - app - INFO - Application startup
+2026-01-09 19:56:52,685 - app - INFO - Application startup
+2026-01-09 19:56:52,702 - app - INFO - Application startup
+2026-01-09 19:56:52,958 - app - INFO - Application startup
+2026-01-09 19:57:02,890 - app - INFO - Application startup
+2026-01-09 19:57:19,192 - app - INFO - Application startup
+2026-01-09 19:57:19,980 - app - INFO - Application startup
+2026-01-09 19:57:20,015 - app - INFO - Application startup
+2026-01-09 19:57:48,033 - app - INFO - Application startup
+2026-01-09 19:58:06,968 - app - INFO - Application startup
+2026-01-09 19:59:12,454 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 19:59:22,167 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:01:48,784 - app - INFO - Application startup
+2026-01-09 20:01:48,790 - app - INFO - Application startup
+2026-01-09 20:01:48,987 - app - INFO - Application startup
+2026-01-09 20:01:53,456 - app - INFO - Application startup
+2026-01-09 20:01:54,577 - app - INFO - Application startup
+2026-01-09 20:01:54,579 - app - INFO - Application startup
+2026-01-09 20:01:58,653 - app - INFO - Application startup
+2026-01-09 20:01:59,824 - app - INFO - Application startup
+2026-01-09 20:01:59,868 - app - INFO - Application startup
+2026-01-09 20:02:05,021 - app - INFO - Application startup
+2026-01-09 20:02:05,061 - app - INFO - Application startup
+2026-01-09 20:02:05,916 - app - INFO - Application startup
+2026-01-09 20:02:10,315 - app - INFO - Application startup
+2026-01-09 20:02:10,316 - app - INFO - Application startup
+2026-01-09 20:02:11,177 - app - INFO - Application startup
+2026-01-09 20:06:05,270 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:06:59,222 - app - INFO - Application startup
+2026-01-09 20:06:59,778 - app - INFO - Application startup
+2026-01-09 20:06:59,853 - app - INFO - Application startup
+2026-01-09 20:07:12,943 - app - INFO - Application startup
+2026-01-09 20:07:12,967 - app - INFO - Application startup
+2026-01-09 20:07:13,243 - app - INFO - Application startup
+2026-01-09 20:07:33,380 - app - INFO - Application startup
+2026-01-09 20:07:33,398 - app - INFO - Application startup
+2026-01-09 20:07:33,485 - app - INFO - Application startup
+2026-01-09 20:07:48,417 - app - INFO - Application startup
+2026-01-09 20:08:10,034 - app - INFO - Application startup
+2026-01-09 20:08:10,886 - app - INFO - Application startup
+2026-01-09 20:08:10,902 - app - INFO - Application startup
+2026-01-09 20:08:22,958 - app - INFO - Application startup
+2026-01-09 20:08:38,850 - app - INFO - Application startup
+2026-01-09 20:09:24,693 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:09:34,396 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:09:38,764 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:14:30,152 - app - INFO - Application startup
+2026-01-09 20:14:30,267 - app - INFO - Application startup
+2026-01-09 20:14:30,334 - app - INFO - Application startup
+2026-01-09 20:14:39,645 - app - INFO - Application startup
+2026-01-09 20:14:39,651 - app - INFO - Application startup
+2026-01-09 20:14:39,660 - app - INFO - Application startup
+2026-01-09 20:14:45,218 - app - INFO - Application startup
+2026-01-09 20:14:45,275 - app - INFO - Application startup
+2026-01-09 20:15:14,627 - app - INFO - Application startup
+2026-01-09 20:15:15,633 - app - INFO - Application startup
+2026-01-09 20:15:15,640 - app - INFO - Application startup
+2026-01-09 20:16:08,338 - app - INFO - Application startup
+2026-01-09 20:16:08,371 - app - INFO - Application startup
+2026-01-09 20:16:17,260 - app - INFO - Application startup
+2026-01-09 20:16:17,709 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:16:29,625 - app - INFO - Application startup
+2026-01-09 20:16:29,632 - app - INFO - Application startup
+2026-01-09 20:16:29,654 - app - INFO - Application startup
+2026-01-09 20:16:38,892 - app - INFO - Application startup
+2026-01-09 20:16:38,913 - app - INFO - Application startup
+2026-01-09 20:16:38,936 - app - INFO - Application startup
+2026-01-09 20:16:44,166 - app - INFO - Application startup
+2026-01-09 20:17:13,326 - app - INFO - Application startup
+2026-01-09 20:17:13,367 - app - INFO - Application startup
+2026-01-09 20:17:13,374 - app - INFO - Application startup
+2026-01-09 20:17:27,754 - app - INFO - Application startup
+2026-01-09 20:17:27,770 - app - INFO - Application startup
+2026-01-09 20:17:27,794 - app - INFO - Application startup
+2026-01-09 20:17:44,995 - app - INFO - Application startup
+2026-01-09 20:17:45,473 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:18:23,470 - app - INFO - Application startup
+2026-01-09 20:18:23,519 - app - INFO - Application startup
+2026-01-09 20:18:23,540 - app - INFO - Application startup
+2026-01-09 20:18:34,754 - app - INFO - Application startup
+2026-01-09 20:18:35,168 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:18:48,597 - app - INFO - Application startup
+2026-01-09 20:18:51,174 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:18:51,824 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:18:52,654 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:18:53,463 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:18:54,203 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:19:08,425 - app - INFO - Application startup
+2026-01-09 20:19:12,828 - app - INFO - Application startup
+2026-01-09 20:24:49,472 - app - INFO - Application startup
+2026-01-09 20:24:49,823 - app - INFO - Application startup
+2026-01-09 20:24:49,875 - app - INFO - Application startup
+2026-01-09 20:24:49,944 - app - INFO - Application startup
+2026-01-09 20:26:39,956 - app - INFO - Application startup
+2026-01-09 20:26:40,027 - app - INFO - Application startup
+2026-01-09 20:26:40,050 - app - INFO - Application startup
+2026-01-09 20:26:40,439 - app - INFO - Application startup
+2026-01-09 20:26:49,654 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:26:52,217 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:26:56,828 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:27:02,299 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:29:36,073 - app - INFO - Application startup
+2026-01-09 20:29:36,075 - app - INFO - Application startup
+2026-01-09 20:29:36,090 - app - INFO - Application startup
+2026-01-09 20:29:36,206 - app - INFO - Application startup
+2026-01-09 20:29:46,499 - app - INFO - Application startup
+2026-01-09 20:29:46,500 - app - INFO - Application startup
+2026-01-09 20:29:46,511 - app - INFO - Application startup
+2026-01-09 20:29:46,550 - app - INFO - Application startup
+2026-01-09 20:30:04,093 - app - INFO - Application startup
+2026-01-09 20:30:04,108 - app - INFO - Application startup
+2026-01-09 20:30:04,125 - app - INFO - Application startup
+2026-01-09 20:30:04,129 - app - INFO - Application startup
+2026-01-09 20:30:09,787 - app - INFO - Application startup
+2026-01-09 20:30:09,787 - app - INFO - Application startup
+2026-01-09 20:30:09,804 - app - INFO - Application startup
+2026-01-09 20:30:09,832 - app - INFO - Application startup
+2026-01-09 20:30:15,139 - app - INFO - Application startup
+2026-01-09 20:30:15,151 - app - INFO - Application startup
+2026-01-09 20:30:15,164 - app - INFO - Application startup
+2026-01-09 20:30:15,170 - app - INFO - Application startup
+2026-01-09 20:30:29,730 - app - INFO - Application startup
+2026-01-09 20:30:32,283 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:30:32,963 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:31:12,503 - app - INFO - Application startup
+2026-01-09 20:31:12,516 - app - INFO - Application startup
+2026-01-09 20:31:12,531 - app - INFO - Application startup
+2026-01-09 20:31:12,532 - app - INFO - Application startup
+2026-01-09 20:31:22,719 - app - INFO - Application startup
+2026-01-09 20:31:25,124 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:31:25,763 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:32:11,091 - app - INFO - Application startup
+2026-01-09 20:32:11,097 - app - INFO - Application startup
+2026-01-09 20:32:11,109 - app - INFO - Application startup
+2026-01-09 20:32:11,112 - app - INFO - Application startup
+2026-01-09 20:32:23,640 - app - INFO - Application startup
+2026-01-09 20:32:24,036 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:33:20,122 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:33:29,939 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:33:34,998 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:33:37,425 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:33:40,298 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:33:59,501 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:40:57,757 - app - INFO - Application startup
+2026-01-09 20:40:57,831 - app - INFO - Application startup
+2026-01-09 20:40:57,858 - app - INFO - Application startup
+2026-01-09 20:40:58,256 - app - INFO - Application startup
+2026-01-09 20:41:03,670 - app - INFO - Application startup
+2026-01-09 20:41:03,828 - app - INFO - Application startup
+2026-01-09 20:41:03,832 - app - INFO - Application startup
+2026-01-09 20:41:04,028 - app - INFO - Application startup
+2026-01-09 20:41:08,878 - app - INFO - Application startup
+2026-01-09 20:41:09,082 - app - INFO - Application startup
+2026-01-09 20:41:09,170 - app - INFO - Application startup
+2026-01-09 20:41:09,255 - app - INFO - Application startup
+2026-01-09 20:41:22,120 - app - INFO - Application startup
+2026-01-09 20:41:44,199 - app - INFO - Application startup
+2026-01-09 20:41:44,449 - app - INFO - Application startup
+2026-01-09 20:41:44,662 - app - INFO - Application startup
+2026-01-09 20:41:44,699 - app - INFO - Application startup
+2026-01-09 20:41:50,030 - app - INFO - Application startup
+2026-01-09 20:41:50,360 - app - INFO - Application startup
+2026-01-09 20:41:50,493 - app - INFO - Application startup
+2026-01-09 20:41:50,518 - app - INFO - Application startup
+2026-01-09 20:41:55,425 - app - INFO - Application startup
+2026-01-09 20:41:55,903 - app - INFO - Application startup
+2026-01-09 20:41:55,944 - app - INFO - Application startup
+2026-01-09 20:41:55,951 - app - INFO - Application startup
+2026-01-09 20:42:00,533 - app - INFO - Application startup
+2026-01-09 20:42:01,219 - app - INFO - Application startup
+2026-01-09 20:42:01,280 - app - INFO - Application startup
+2026-01-09 20:42:05,881 - app - INFO - Application startup
+2026-01-09 20:42:18,506 - app - INFO - Application startup
+2026-01-09 20:42:36,382 - app - INFO - Application startup
+2026-01-09 20:44:15,759 - app - INFO - Application startup
+2026-01-09 20:44:15,766 - app - INFO - Application startup
+2026-01-09 20:44:15,809 - app - INFO - Application startup
+2026-01-09 20:44:15,889 - app - INFO - Application startup
+2026-01-09 20:44:42,389 - app - INFO - Application startup
+2026-01-09 20:44:42,981 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:45:06,761 - app - INFO - Application startup
+2026-01-09 20:45:06,775 - app - INFO - Application startup
+2026-01-09 20:45:06,781 - app - INFO - Application startup
+2026-01-09 20:45:06,833 - app - INFO - Application startup
+2026-01-09 20:45:13,223 - app - INFO - Application startup
+2026-01-09 20:45:13,243 - app - INFO - Application startup
+2026-01-09 20:45:13,269 - app - INFO - Application startup
+2026-01-09 20:45:19,645 - app - INFO - Application startup
+2026-01-09 20:45:19,650 - app - INFO - Application startup
+2026-01-09 20:45:19,653 - app - INFO - Application startup
+2026-01-09 20:45:19,680 - app - INFO - Application startup
+2026-01-09 20:45:31,429 - app - INFO - Application startup
+2026-01-09 20:45:31,582 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:45:54,413 - app - INFO - Application startup
+2026-01-09 20:45:54,435 - app - INFO - Application startup
+2026-01-09 20:45:54,446 - app - INFO - Application startup
+2026-01-09 20:45:54,458 - app - INFO - Application startup
+2026-01-09 20:46:04,415 - app - INFO - Application startup
+2026-01-09 20:46:04,417 - app - INFO - Application startup
+2026-01-09 20:46:04,417 - app - INFO - Application startup
+2026-01-09 20:46:04,440 - app - INFO - Application startup
+2026-01-09 20:46:11,712 - app - INFO - Application startup
+2026-01-09 20:46:11,869 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:46:31,721 - app - INFO - Application startup
+2026-01-09 20:46:31,723 - app - INFO - Application startup
+2026-01-09 20:46:31,761 - app - INFO - Application startup
+2026-01-09 20:46:38,833 - app - INFO - Application startup
+2026-01-09 20:46:38,977 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:50:03,498 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:50:24,112 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:50:28,948 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:50:31,852 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:50:34,373 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:50:39,838 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:50:42,975 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 20:57:13,396 - app - INFO - Application startup
+2026-01-09 20:57:13,397 - app - INFO - Application startup
+2026-01-09 20:57:13,426 - app - INFO - Application startup
+2026-01-09 20:57:13,502 - app - INFO - Application startup
+2026-01-09 21:07:13,791 - app - INFO - Application startup
+2026-01-09 21:07:13,811 - app - INFO - Application startup
+2026-01-09 21:07:13,823 - app - INFO - Application startup
+2026-01-09 21:07:13,855 - app - INFO - Application startup
+2026-01-09 21:17:03,572 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:17:13,595 - app - INFO - Application startup
+2026-01-09 21:17:13,597 - app - INFO - Application startup
+2026-01-09 21:17:14,578 - app - INFO - Application startup
+2026-01-09 21:18:06,889 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:20:20,266 - app - INFO - Application startup
+2026-01-09 21:20:20,798 - app - INFO - Application startup
+2026-01-09 21:20:20,813 - app - INFO - Application startup
+2026-01-09 21:20:20,858 - app - INFO - Application startup
+2026-01-09 21:22:42,128 - app - INFO - Application startup
+2026-01-09 21:22:42,246 - app - INFO - Application startup
+2026-01-09 21:22:42,252 - app - INFO - Application startup
+2026-01-09 21:22:42,433 - app - INFO - Application startup
+2026-01-09 21:22:57,103 - app - INFO - Application startup
+2026-01-09 21:22:57,150 - app - INFO - Application startup
+2026-01-09 21:22:57,154 - app - INFO - Application startup
+2026-01-09 21:22:57,259 - app - INFO - Application startup
+2026-01-09 21:23:34,062 - app - INFO - Application startup
+2026-01-09 21:23:34,478 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:23:49,356 - app - INFO - Application startup
+2026-01-09 21:23:49,515 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:32:13,898 - app - INFO - Application startup
+2026-01-09 21:32:13,916 - app - INFO - Application startup
+2026-01-09 21:32:13,918 - app - INFO - Application startup
+2026-01-09 21:32:13,923 - app - INFO - Application startup
+2026-01-09 21:36:44,683 - app - INFO - Application startup
+2026-01-09 21:36:44,772 - app - INFO - Application startup
+2026-01-09 21:36:44,774 - app - INFO - Application startup
+2026-01-09 21:36:44,804 - app - INFO - Application startup
+2026-01-09 21:36:53,376 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:38:29,752 - app - INFO - Application startup
+2026-01-09 21:38:29,754 - app - INFO - Application startup
+2026-01-09 21:38:29,768 - app - INFO - Application startup
+2026-01-09 21:38:29,825 - app - INFO - Application startup
+2026-01-09 21:38:46,250 - app - INFO - Application startup
+2026-01-09 21:38:46,408 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:39:23,661 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:39:31,008 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:39:34,151 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:39:39,277 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:41:40,131 - app - INFO - Application startup
+2026-01-09 21:41:40,161 - app - INFO - Application startup
+2026-01-09 21:41:40,177 - app - INFO - Application startup
+2026-01-09 21:42:14,573 - app - INFO - Application startup
+2026-01-09 21:42:14,681 - app - INFO - Application startup
+2026-01-09 21:42:14,688 - app - INFO - Application startup
+2026-01-09 21:42:14,712 - app - INFO - Application startup
+2026-01-09 21:43:12,056 - app - INFO - Application startup
+2026-01-09 21:43:12,162 - app - INFO - Application startup
+2026-01-09 21:43:12,216 - app - INFO - Application startup
+2026-01-09 21:43:12,228 - app - INFO - Application startup
+2026-01-09 21:45:40,439 - app - INFO - Application startup
+2026-01-09 21:45:40,442 - app - INFO - Application startup
+2026-01-09 21:45:40,454 - app - INFO - Application startup
+2026-01-09 21:45:40,462 - app - INFO - Application startup
+2026-01-09 21:45:55,392 - app - INFO - Application startup
+2026-01-09 21:45:55,538 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:46:40,835 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:47:04,471 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:47:15,126 - app - INFO - Application startup
+2026-01-09 21:47:15,128 - app - INFO - Application startup
+2026-01-09 21:47:15,128 - app - INFO - Application startup
+2026-01-09 21:47:15,136 - app - INFO - Application startup
+2026-01-09 21:48:19,006 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:51:21,740 - app - INFO - Application startup
+2026-01-09 21:51:21,740 - app - INFO - Application startup
+2026-01-09 21:51:21,755 - app - INFO - Application startup
+2026-01-09 21:51:42,701 - app - INFO - Application startup
+2026-01-09 21:51:42,702 - app - INFO - Application startup
+2026-01-09 21:51:42,704 - app - INFO - Application startup
+2026-01-09 21:51:42,737 - app - INFO - Application startup
+2026-01-09 21:52:10,989 - app - INFO - Application startup
+2026-01-09 21:52:10,994 - app - INFO - Application startup
+2026-01-09 21:52:11,031 - app - INFO - Application startup
+2026-01-09 21:52:11,048 - app - INFO - Application startup
+2026-01-09 21:52:34,006 - app - INFO - Application startup
+2026-01-09 21:52:34,049 - app - INFO - Application startup
+2026-01-09 21:52:34,058 - app - INFO - Application startup
+2026-01-09 21:52:40,219 - app - INFO - Application startup
+2026-01-09 21:52:40,317 - app - INFO - Application startup
+2026-01-09 21:52:40,333 - app - INFO - Application startup
+2026-01-09 21:52:40,374 - app - INFO - Application startup
+2026-01-09 21:52:46,157 - app - INFO - Application startup
+2026-01-09 21:52:46,249 - app - INFO - Application startup
+2026-01-09 21:52:46,289 - app - INFO - Application startup
+2026-01-09 21:52:46,293 - app - INFO - Application startup
+2026-01-09 21:53:05,809 - app - INFO - Application startup
+2026-01-09 21:53:06,330 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:53:34,367 - app - INFO - Application startup
+2026-01-09 21:53:34,865 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:54:30,241 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:54:37,801 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:54:45,608 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:54:47,615 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:54:50,718 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:54:53,827 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:54:58,563 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:55:02,962 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:55:03,579 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:55:57,156 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:55:57,845 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:00,254 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:00,880 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:03,505 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:04,166 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:08,332 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:08,953 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:12,576 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:13,187 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:17,081 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:17,676 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:33,177 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:56:58,500 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:03,430 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:04,197 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:08,009 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:08,667 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:12,071 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:12,679 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:14,708 - app - INFO - Application startup
+2026-01-09 21:57:14,708 - app - INFO - Application startup
+2026-01-09 21:57:15,413 - app - INFO - Application startup
+2026-01-09 21:57:15,444 - app - INFO - Application startup
+2026-01-09 21:57:18,840 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:19,471 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:35,053 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:35,684 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:42,123 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:42,778 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:49,077 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:49,766 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:58,219 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:57:58,860 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:58:10,009 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:58:11,744 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:58:30,198 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:58:30,850 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:58:39,789 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 21:58:40,493 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 22:07:14,364 - app - INFO - Application startup
+2026-01-09 22:07:14,391 - app - INFO - Application startup
+2026-01-09 22:07:14,989 - app - INFO - Application startup
+2026-01-09 22:07:15,272 - app - INFO - Application startup
+2026-01-09 22:07:49,004 - app - INFO - Application startup
+2026-01-09 22:07:53,496 - app - INFO - Application startup
+2026-01-09 22:08:07,105 - app - INFO - Application startup
+2026-01-09 22:08:07,106 - app - INFO - Application startup
+2026-01-09 22:08:07,449 - app - INFO - Application startup
+2026-01-09 22:08:07,650 - app - INFO - Application startup
+2026-01-09 22:08:07,956 - app - INFO - Application startup
+2026-01-09 22:08:13,351 - app - INFO - Application startup
+2026-01-09 22:08:13,379 - app - INFO - Application startup
+2026-01-09 22:08:13,672 - app - INFO - Application startup
+2026-01-09 22:08:13,832 - app - INFO - Application startup
+2026-01-09 22:08:13,995 - app - INFO - Application startup
+2026-01-09 22:08:19,118 - app - INFO - Application startup
+2026-01-09 22:08:19,338 - app - INFO - Application startup
+2026-01-09 22:08:19,734 - app - INFO - Application startup
+2026-01-09 22:08:19,772 - app - INFO - Application startup
+2026-01-09 22:08:19,838 - app - INFO - Application startup
+2026-01-09 22:08:24,966 - app - INFO - Application startup
+2026-01-09 22:08:25,011 - app - INFO - Application startup
+2026-01-09 22:08:25,610 - app - INFO - Application startup
+2026-01-09 22:08:25,731 - app - INFO - Application startup
+2026-01-09 22:08:25,755 - app - INFO - Application startup
+2026-01-09 22:08:30,778 - app - INFO - Application startup
+2026-01-09 22:08:30,785 - app - INFO - Application startup
+2026-01-09 22:08:31,413 - app - INFO - Application startup
+2026-01-09 22:08:31,464 - app - INFO - Application startup
+2026-01-09 22:08:31,499 - app - INFO - Application startup
+2026-01-09 22:09:29,098 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 22:09:29,727 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 22:09:33,065 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 22:09:33,719 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 22:09:50,082 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-09 22:17:15,068 - app - INFO - Application startup
+2026-01-09 22:17:15,071 - app - INFO - Application startup
+2026-01-09 22:17:15,697 - app - INFO - Application startup
+2026-01-09 22:17:15,732 - app - INFO - Application startup
+2026-01-09 22:32:15,396 - app - INFO - Application startup
+2026-01-09 22:32:15,423 - app - INFO - Application startup
+2026-01-09 22:32:15,702 - app - INFO - Application startup
+2026-01-09 22:32:15,788 - app - INFO - Application startup
+2026-01-09 22:42:15,546 - app - INFO - Application startup
+2026-01-09 22:42:15,559 - app - INFO - Application startup
+2026-01-09 22:42:15,719 - app - INFO - Application startup
+2026-01-09 22:42:15,794 - app - INFO - Application startup
+2026-01-09 22:47:15,943 - app - INFO - Application startup
+2026-01-09 22:47:15,956 - app - INFO - Application startup
+2026-01-09 22:47:15,963 - app - INFO - Application startup
+2026-01-09 22:47:16,008 - app - INFO - Application startup
+2026-01-09 22:52:15,420 - app - INFO - Application startup
+2026-01-09 22:52:15,494 - app - INFO - Application startup
+2026-01-09 22:52:15,509 - app - INFO - Application startup
+2026-01-09 22:52:15,511 - app - INFO - Application startup
+2026-01-09 22:57:15,820 - app - INFO - Application startup
+2026-01-09 22:57:15,868 - app - INFO - Application startup
+2026-01-09 22:57:15,931 - app - INFO - Application startup
+2026-01-09 22:57:15,944 - app - INFO - Application startup
+2026-01-09 23:07:16,089 - app - INFO - Application startup
+2026-01-09 23:07:18,008 - app - INFO - Application startup
+2026-01-09 23:12:19,244 - app - INFO - Application startup
+2026-01-09 23:12:19,247 - app - INFO - Application startup
+2026-01-09 23:12:19,255 - app - INFO - Application startup
+2026-01-09 23:12:19,326 - app - INFO - Application startup
+2026-01-09 23:17:19,108 - app - INFO - Application startup
+2026-01-09 23:17:19,112 - app - INFO - Application startup
+2026-01-09 23:17:19,114 - app - INFO - Application startup
+2026-01-09 23:17:19,118 - app - INFO - Application startup
+2026-01-09 23:32:19,628 - app - INFO - Application startup
+2026-01-09 23:32:19,640 - app - INFO - Application startup
+2026-01-09 23:32:19,709 - app - INFO - Application startup
+2026-01-09 23:32:19,723 - app - INFO - Application startup
+2026-01-09 23:42:19,569 - app - INFO - Application startup
+2026-01-09 23:42:19,584 - app - INFO - Application startup
+2026-01-09 23:42:19,600 - app - INFO - Application startup
+2026-01-09 23:42:19,610 - app - INFO - Application startup
+2026-01-09 23:47:20,230 - app - INFO - Application startup
+2026-01-09 23:47:20,256 - app - INFO - Application startup
+2026-01-09 23:47:20,269 - app - INFO - Application startup
+2026-01-09 23:47:20,278 - app - INFO - Application startup
+2026-01-09 23:52:19,923 - app - INFO - Application startup
+2026-01-09 23:52:20,014 - app - INFO - Application startup
+2026-01-09 23:52:20,075 - app - INFO - Application startup
+2026-01-09 23:52:20,142 - app - INFO - Application startup
+2026-01-09 23:57:20,802 - app - INFO - Application startup
+2026-01-09 23:57:20,858 - app - INFO - Application startup
+2026-01-09 23:57:20,862 - app - INFO - Application startup
+2026-01-09 23:57:21,060 - app - INFO - Application startup
+2026-01-10 00:07:21,445 - app - INFO - Application startup
+2026-01-10 00:07:22,065 - app - INFO - Application startup
+2026-01-10 00:07:22,142 - app - INFO - Application startup
+2026-01-10 00:07:22,160 - app - INFO - Application startup
+2026-01-10 00:12:21,845 - app - INFO - Application startup
+2026-01-10 00:12:21,865 - app - INFO - Application startup
+2026-01-10 00:12:21,872 - app - INFO - Application startup
+2026-01-10 00:12:22,036 - app - INFO - Application startup
+2026-01-10 00:17:21,213 - app - INFO - Application startup
+2026-01-10 00:17:21,317 - app - INFO - Application startup
+2026-01-10 00:17:21,360 - app - INFO - Application startup
+2026-01-10 00:17:21,424 - app - INFO - Application startup
+2026-01-10 00:32:21,864 - app - INFO - Application startup
+2026-01-10 00:32:21,869 - app - INFO - Application startup
+2026-01-10 00:32:21,879 - app - INFO - Application startup
+2026-01-10 00:42:22,384 - app - INFO - Application startup
+2026-01-10 00:42:22,531 - app - INFO - Application startup
+2026-01-10 00:42:22,558 - app - INFO - Application startup
+2026-01-10 00:47:22,270 - app - INFO - Application startup
+2026-01-10 00:47:22,329 - app - INFO - Application startup
+2026-01-10 00:47:22,373 - app - INFO - Application startup
+2026-01-10 00:47:22,378 - app - INFO - Application startup
+2026-01-10 00:52:22,397 - app - INFO - Application startup
+2026-01-10 00:52:22,418 - app - INFO - Application startup
+2026-01-10 00:52:22,447 - app - INFO - Application startup
+2026-01-10 00:52:22,475 - app - INFO - Application startup
+2026-01-10 00:57:23,047 - app - INFO - Application startup
+2026-01-10 00:57:23,068 - app - INFO - Application startup
+2026-01-10 00:57:23,084 - app - INFO - Application startup
+2026-01-10 00:57:23,137 - app - INFO - Application startup
+2026-01-10 01:07:23,610 - app - INFO - Application startup
+2026-01-10 01:07:23,679 - app - INFO - Application startup
+2026-01-10 01:07:23,683 - app - INFO - Application startup
+2026-01-10 01:07:23,696 - app - INFO - Application startup
+2026-01-10 01:12:23,844 - app - INFO - Application startup
+2026-01-10 01:12:23,850 - app - INFO - Application startup
+2026-01-10 01:12:23,866 - app - INFO - Application startup
+2026-01-10 01:17:24,333 - app - INFO - Application startup
+2026-01-10 01:17:24,341 - app - INFO - Application startup
+2026-01-10 01:17:24,387 - app - INFO - Application startup
+2026-01-10 01:17:24,393 - app - INFO - Application startup
+2026-01-10 01:32:24,800 - app - INFO - Application startup
+2026-01-10 01:32:24,803 - app - INFO - Application startup
+2026-01-10 01:32:24,819 - app - INFO - Application startup
+2026-01-10 01:42:26,025 - app - INFO - Application startup
+2026-01-10 01:42:26,032 - app - INFO - Application startup
+2026-01-10 01:42:26,041 - app - INFO - Application startup
+2026-01-10 01:42:26,057 - app - INFO - Application startup
+2026-01-10 09:57:19,898 - app - INFO - Application startup
+2026-01-10 09:57:19,962 - app - INFO - Application startup
+2026-01-10 09:57:20,116 - app - INFO - Application startup
+2026-01-10 09:57:20,308 - app - INFO - Application startup
+2026-01-10 10:00:22,533 - app - INFO - Application startup
+2026-01-10 10:00:27,980 - app - INFO - Application startup
+2026-01-10 10:04:59,604 - app - INFO - 用户登录成功: admin@example.com from 127.0.0.1
+2026-01-10 10:05:05,737 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:06,436 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:11,368 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:12,115 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:15,218 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:15,808 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:18,606 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:19,252 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:23,916 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:24,793 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:31,483 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:05:32,252 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:20:43,284 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:20:43,940 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:20:48,102 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:20:48,735 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:20:51,777 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:20:52,444 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:20:58,109 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:20:58,758 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:21:02,358 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:21:03,010 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:21:08,088 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:21:08,809 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:21:23,698 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:21:33,321 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:21:39,965 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:22:39,293 - app - INFO - Application startup
+2026-01-10 10:22:39,295 - app - INFO - Application startup
+2026-01-10 10:22:39,297 - app - INFO - Application startup
+2026-01-10 10:22:39,320 - app - INFO - Application startup
+2026-01-10 10:29:33,454 - app - INFO - Application startup
+2026-01-10 10:29:33,459 - app - INFO - Application startup
+2026-01-10 10:29:33,472 - app - INFO - Application startup
+2026-01-10 10:29:33,478 - app - INFO - Application startup
+2026-01-10 10:29:33,503 - app - INFO - Application startup
+2026-01-10 10:30:18,097 - app - INFO - Application startup
+2026-01-10 10:30:22,510 - app - INFO - Application startup
+2026-01-10 10:31:45,148 - app - INFO - Application startup
+2026-01-10 10:31:45,153 - app - INFO - Application startup
+2026-01-10 10:31:45,159 - app - INFO - Application startup
+2026-01-10 10:31:45,255 - app - INFO - Application startup
+2026-01-10 10:31:45,256 - app - INFO - Application startup
+2026-01-10 10:33:14,163 - app - INFO - Application startup
+2026-01-10 10:33:14,301 - app - INFO - Application startup
+2026-01-10 10:33:14,306 - app - INFO - Application startup
+2026-01-10 10:33:14,381 - app - INFO - Application startup
+2026-01-10 10:33:14,409 - app - INFO - Application startup
+2026-01-10 10:34:20,807 - app - INFO - Application startup
+2026-01-10 10:34:20,908 - app - INFO - Application startup
+2026-01-10 10:34:21,002 - app - INFO - Application startup
+2026-01-10 10:34:21,026 - app - INFO - Application startup
+2026-01-10 10:34:21,048 - app - INFO - Application startup
+2026-01-10 10:34:45,974 - app - INFO - Application startup
+2026-01-10 10:34:50,685 - app - INFO - Application startup
+2026-01-10 10:35:34,049 - app - INFO - Application startup
+2026-01-10 10:35:34,132 - app - INFO - Application startup
+2026-01-10 10:35:34,220 - app - INFO - Application startup
+2026-01-10 10:35:34,266 - app - INFO - Application startup
+2026-01-10 10:35:34,692 - app - INFO - Application startup
+2026-01-10 10:37:49,538 - app - INFO - Application startup
+2026-01-10 10:37:49,696 - app - INFO - Application startup
+2026-01-10 10:37:49,706 - app - INFO - Application startup
+2026-01-10 10:37:49,948 - app - INFO - Application startup
+2026-01-10 10:37:50,368 - app - INFO - Application startup
+2026-01-10 10:37:59,563 - app - INFO - Application startup
+2026-01-10 10:38:00,055 - app - INFO - Application startup
+2026-01-10 10:38:00,403 - app - INFO - Application startup
+2026-01-10 10:38:00,410 - app - INFO - Application startup
+2026-01-10 10:38:00,530 - app - INFO - Application startup
+2026-01-10 10:42:15,113 - app - INFO - Application startup
+2026-01-10 10:42:15,608 - app - INFO - Application startup
+2026-01-10 10:42:15,619 - app - INFO - Application startup
+2026-01-10 10:42:15,626 - app - INFO - Application startup
+2026-01-10 10:42:15,877 - app - INFO - Application startup
+2026-01-10 10:42:25,728 - app - INFO - Application startup
+2026-01-10 10:42:25,745 - app - INFO - Application startup
+2026-01-10 10:42:25,791 - app - INFO - Application startup
+2026-01-10 10:42:26,009 - app - INFO - Application startup
+2026-01-10 10:42:26,216 - app - INFO - Application startup
+2026-01-10 10:50:54,898 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:50:55,496 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:50:59,523 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:00,192 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:03,223 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:03,844 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:08,909 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:09,519 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:12,185 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:12,814 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:19,196 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:19,789 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:25,510 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:26,129 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:51:46,547 - app.services.traffic_prediction_service - INFO - 成功加载景点数据，共 2941 个景点
+2026-01-10 10:54:35,906 - app - INFO - Application startup
+2026-01-10 10:54:35,911 - app - INFO - Application startup
+2026-01-10 10:54:35,925 - app - INFO - Application startup
+2026-01-10 10:54:36,098 - app - INFO - Application startup
+2026-01-10 10:54:36,433 - app - INFO - Application startup
+2026-01-10 10:57:06,111 - app - INFO - Application startup
+2026-01-10 10:57:06,123 - app - INFO - Application startup
+2026-01-10 10:57:06,349 - app - INFO - Application startup
+2026-01-10 10:57:06,437 - app - INFO - Application startup
+2026-01-10 11:00:29,964 - app - INFO - Application startup
+2026-01-10 11:00:29,969 - app - INFO - Application startup
+2026-01-10 11:00:30,411 - app - INFO - Application startup
+2026-01-10 11:00:30,418 - app - INFO - Application startup
+2026-01-10 11:01:53,850 - app - INFO - Application startup
+2026-01-10 11:01:53,872 - app - INFO - Application startup
+2026-01-10 11:01:54,090 - app - INFO - Application startup
+2026-01-10 11:01:54,188 - app - INFO - Application startup

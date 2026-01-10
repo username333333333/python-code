@@ -149,7 +149,8 @@ class PathOptimizationService:
     def _filter_attractions(self, preferences, start_city, target_city):
         """根据用户偏好筛选景点，只包含目标城市的景点，并结合推荐服务"""
         # 直接使用目标城市作为筛选条件，不考虑用户提供的cities偏好
-        target_city_query = target_city + "市" if "市" not in target_city else target_city
+        # 移除城市名称中的"市"后缀，确保与数据库中的格式一致
+        target_city_query = target_city.replace("市", "")
         
         # 只查询目标城市的景点
         query = Attraction.query.filter(Attraction.city == target_city_query)
@@ -175,64 +176,114 @@ class PathOptimizationService:
             # 如果有景点类型偏好，使用推荐服务获取更精准的推荐
             if attraction_types and len(attraction_types) > 0:
                 try:
-                    # 转换景点列表为DataFrame以便推荐服务处理
-                    import pandas as pd
-                    attraction_data = []
-                    for attr in attractions:
-                        attraction_data.append({
-                            '景点名称': attr.name,
-                            '城市': attr.city,
-                            '景点类型': attr.type,
-                            '评分': attr.rating,
-                            '门票价格': attr.price or 0,
-                            '最佳季节': attr.best_season or '全年',
-                            '简介': attr.description or ''
-                        })
+                    # 类型映射：处理用户选择的类型与数据库实际类型的匹配
+                    type_mapping = {
+                        '风景区': ['风景区', '风景名胜'],
+                        '风景名胜': ['风景区', '风景名胜'],
+                        '公园': ['公园', '城市公园', '生态公园'],
+                        '博物馆': ['博物馆', '博物院', '陈列馆', '纪念馆'],
+                        '历史古迹': ['历史古迹', '古迹', '古建筑', '历史建筑', '遗址', '古迹遗址'],
+                        '自然景观': ['自然景观', '自然', '山水', '湖泊', '河流', '森林', '山脉'],
+                        '科教文化服务': ['博物馆', '博物院', '陈列馆', '纪念馆', '科教文化服务'],
+                        '体育休闲服务': ['体育', '休闲', '运动', '体育休闲服务']
+                    }
                     
-                    if attraction_data:
-                        # 创建临时DataFrame
-                        temp_df = pd.DataFrame(attraction_data)
+                    # 获取要匹配的所有类型列表
+                    all_target_types = []
+                    for selected_type in attraction_types:
+                        target_types = type_mapping.get(selected_type, [selected_type])
+                        all_target_types.extend(target_types)
+                    # 去重
+                    all_target_types = list(set(all_target_types))
+                    
+                    # 扩展匹配逻辑：不仅匹配类型字段，还匹配名称和描述
+                    filtered_by_type = []
+                    for attr in attractions:
+                        # 检查景点类型是否在目标类型列表中
+                        match = False
                         
-                        # 使用推荐服务根据景点类型排序
-                        # 只使用第一个景点类型进行推荐
-                        recommended_df = self.recommendation_service.recommend_by_attraction_type(
-                            attraction_type=attraction_types[0],
-                            city=target_city,
-                            top_n=len(temp_df)
-                        )
+                        # 匹配景点类型字段
+                        if attr.type in all_target_types:
+                            match = True
+                        # 匹配景点名称
+                        elif any(keyword in attr.name for keyword in all_target_types):
+                            match = True
+                        # 匹配景点描述
+                        elif attr.description and any(keyword in attr.description for keyword in all_target_types):
+                            match = True
+                        # 特殊类型的关键词匹配
+                        elif '博物馆' in attraction_types and '博物馆' in attr.name:
+                            match = True
+                        elif '公园' in attraction_types and ('公园' in attr.name or '园' in attr.name):
+                            match = True
+                        elif '风景区' in attraction_types and ('风景区' in attr.name or '风景' in attr.name):
+                            match = True
+                        elif '历史古迹' in attraction_types and ('古迹' in attr.name or '遗址' in attr.name or '古' in attr.name or '历史' in attr.name):
+                            match = True
+                        elif '自然景观' in attraction_types and ('自然' in attr.name or '山水' in attr.name or '湖' in attr.name or '河' in attr.name or '山' in attr.name):
+                            match = True
                         
-                        if not recommended_df.empty:
-                            # 根据推荐结果重新排序景点列表
-                            recommended_names = recommended_df['景点名称'].tolist()
-                            
-                            # 按推荐顺序排序景点
-                            sorted_attractions = []
-                            seen = set()
-                            
-                            # 先添加推荐的景点
-                            for name in recommended_names:
-                                for attr in attractions:
-                                    # 确保attr是景点对象，而不是字典
-                                    if hasattr(attr, 'id') and hasattr(attr, 'name'):
-                                        if attr.name == name and attr.id not in seen:
-                                            sorted_attractions.append(attr)
-                                            seen.add(attr.id)
-                                            break
-                            
-                            # 再添加未被推荐的景点
-                            for attr in attractions:
+                        if match:
+                            filtered_by_type.append(attr)
+                    
+                    print(f"根据类型{all_target_types}过滤后景点数量: {len(filtered_by_type)}")
+                    
+                    # 如果过滤后没有景点，直接返回空列表
+                    if not filtered_by_type:
+                        print("没有找到符合类型条件的景点，返回空列表")
+                        return []
+                    
+                    # 使用推荐服务根据景点类型排序
+                    # 传递处理后的城市名称（去除"市"后缀）
+                    # 使用最相关的类型进行推荐（用户选择的第一个类型）
+                    recommended_df = self.recommendation_service.recommend_by_attraction_type(
+                        attraction_type=attraction_types[0],
+                        city=target_city_query,
+                        top_n=len(filtered_by_type),
+                        min_rating=min_rating
+                    )
+                    
+                    print(f"推荐服务返回结果数量: {len(recommended_df)}")
+                    
+                    if not recommended_df.empty:
+                        # 根据推荐结果重新排序景点列表
+                        recommended_names = recommended_df['景点名称'].tolist()
+                        
+                        # 按推荐顺序排序景点
+                        sorted_attractions = []
+                        seen = set()
+                        
+                        # 先添加推荐的景点
+                        for name in recommended_names:
+                            for attr in filtered_by_type:
                                 # 确保attr是景点对象，而不是字典
-                                if hasattr(attr, 'id'):
-                                    if attr.id not in seen:
+                                if hasattr(attr, 'id') and hasattr(attr, 'name'):
+                                    if attr.name == name and attr.id not in seen:
                                         sorted_attractions.append(attr)
                                         seen.add(attr.id)
-                            
-                            # 只有在排序后的景点列表不为空时才使用排序结果
-                            if sorted_attractions:
-                                attractions = sorted_attractions
+                                        break
+                        
+                        # 再添加未被推荐的景点
+                        for attr in filtered_by_type:
+                            # 确保attr是景点对象，而不是字典
+                            if hasattr(attr, 'id'):
+                                if attr.id not in seen:
+                                    sorted_attractions.append(attr)
+                                    seen.add(attr.id)
+                        
+                        # 只有在排序后的景点列表不为空时才使用排序结果
+                        if sorted_attractions:
+                            attractions = sorted_attractions
+                            print(f"排序后景点数量: {len(attractions)}")
+                    else:
+                        # 如果推荐服务没有返回结果，使用过滤后的景点列表
+                        attractions = filtered_by_type
+                        print(f"使用过滤后的景点列表，数量: {len(attractions)}")
                 except Exception as e:
                     # 如果推荐服务出现任何错误，使用原始的景点列表
                     print(f"推荐服务出现错误: {str(e)}")
+                    import traceback
+                    traceback.print_exc()
         
         return attractions
     
@@ -246,10 +297,19 @@ class PathOptimizationService:
         
         for _ in range(population_size):
             # 生成随机路径长度（目标城市景点数量）
-            path_length = random.randint(3, min(7, len(attractions)))
+            # 确保路径长度不超过可用景点数量，且至少为1
+            max_path_length = len(attractions)
+            path_length = random.randint(1, min(7, max_path_length))
             
             # 随机选择目标城市的景点
-            selected_target_attrs = random.sample(attractions, min(path_length, len(attractions)))
+            # 如果可用景点数量不足，允许重复选择
+            if len(attractions) >= path_length:
+                selected_target_attrs = random.sample(attractions, path_length)
+            else:
+                # 当景点数量不足时，重复使用现有景点
+                selected_target_attrs = []
+                for _ in range(path_length):
+                    selected_target_attrs.append(random.choice(attractions))
             
             # 构建路径：只包含目标城市景点，行程生成时会自动添加起点和终点
             path = selected_target_attrs
@@ -764,8 +824,9 @@ class PathOptimizationService:
                     attr_name = selected_attr.get('name')
                     attr_city = selected_attr.get('city')
                     if attr_name and attr_city:
-                        # 查询对应的景点对象
-                        attr_city_query = attr_city + "市" if "市" not in attr_city else attr_city
+                        # 查询对应的景点对象，移除城市名称中的"市"后缀，确保与数据库中的格式一致
+                        attr_city_query = attr_city.replace("市", "")
+                        # 先尝试精确匹配
                         attr = Attraction.query.filter(
                             Attraction.name == attr_name,
                             Attraction.city == attr_city_query
@@ -773,7 +834,17 @@ class PathOptimizationService:
                         if attr:
                             suitable_attractions.append(attr)
                         else:
-                            print(f"未找到对应景点: {attr_city} - {attr_name}")
+                            # 如果精确匹配失败，尝试模糊匹配景点名称
+                            print(f"尝试精确匹配未找到对应景点: {attr_city} - {attr_name}")
+                            attr = Attraction.query.filter(
+                                Attraction.name.like(f"%{attr_name}%"),
+                                Attraction.city == attr_city_query
+                            ).first()
+                            if attr:
+                                suitable_attractions.append(attr)
+                                print(f"模糊匹配找到对应景点: {attr.city} - {attr.name}")
+                            else:
+                                print(f"模糊匹配也未找到对应景点: {attr_city} - {attr_name}")
                 print(f"从用户选择的景点中找到数据库对象数量: {len(suitable_attractions)}")
             else:
                 # 2. 如果没有用户选择的景点，根据偏好筛选目标城市的景点
@@ -813,6 +884,16 @@ class PathOptimizationService:
                     print(f"用户选择的景点数量不足2个，重复使用现有景点，当前数量: {len(suitable_attractions)}")
                     suitable_attractions = suitable_attractions * 2
                     print(f"重复后景点数量: {len(suitable_attractions)}")
+                
+                # 确保景点数量至少等于旅行天数，这样每天至少有一个景点
+                if len(suitable_attractions) < days:
+                    print(f"用户选择的景点数量({len(suitable_attractions)})小于旅行天数({days})，重复使用现有景点")
+                    # 重复景点直到数量至少等于旅行天数
+                    while len(suitable_attractions) < days:
+                        suitable_attractions.extend(suitable_attractions)
+                    # 限制最大数量，避免过多重复
+                    suitable_attractions = suitable_attractions[:days * 2]
+                    print(f"重复后景点数量: {len(suitable_attractions)}")
             else:
                 # 限制景点数量，提高性能
                 suitable_attractions = suitable_attractions[:50]  # 最多使用50个景点
@@ -842,10 +923,19 @@ class PathOptimizationService:
             
             for _ in range(population_size):
                 # 生成随机路径长度（目标城市景点数量）
-                path_length = random.randint(3, min(7, len(valid_attractions)))
+                # 确保路径长度不超过可用景点数量，且至少为1
+                max_path_length = len(valid_attractions)
+                path_length = random.randint(1, min(7, max_path_length))
                 
                 # 随机选择目标城市的景点
-                selected_target_attrs = random.sample(valid_attractions, min(path_length, len(valid_attractions)))
+                # 如果可用景点数量不足，允许重复选择
+                selected_target_attrs = []
+                if len(valid_attractions) >= path_length:
+                    selected_target_attrs = random.sample(valid_attractions, path_length)
+                else:
+                    # 当景点数量不足时，重复使用现有景点
+                    for _ in range(path_length):
+                        selected_target_attrs.append(random.choice(valid_attractions))
                 
                 # 构建路径：目标城市景点（遗传算法优化后，行程生成时会自动添加起点和终点）
                 path = selected_target_attrs
@@ -1338,7 +1428,8 @@ class PathOptimizationService:
     def _get_suitable_replacements(self, current_attractions, weather, target_city, count=3):
         """获取适合当前天气的替代景点"""
         # 获取目标城市的所有景点
-        target_city_query = target_city + "市" if "市" not in target_city else target_city
+        # 移除城市名称中的"市"后缀，确保与数据库中的格式一致
+        target_city_query = target_city.replace("市", "")
         all_attractions = Attraction.query.filter(Attraction.city == target_city_query).all()
         
         # 计算每个景点的适合度并排序

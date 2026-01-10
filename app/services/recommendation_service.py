@@ -667,10 +667,38 @@ class RecommendationService:
         filtered_attractions = self.attractions_df.copy()
         
         if city:
-            filtered_attractions = filtered_attractions[filtered_attractions['城市'] == city]
+            # 城市名称匹配：尝试精确匹配和模糊匹配
+            city_match = filtered_attractions['城市'] == city
+            if not city_match.any():
+                # 尝试模糊匹配，去除城市名称中的"市"后缀
+                city_match = filtered_attractions['城市'] == city.replace("市", "")
+            if not city_match.any():
+                # 尝试模糊匹配，添加"市"后缀
+                city_match = filtered_attractions['城市'] == city + "市"
+            if city_match.any():
+                filtered_attractions = filtered_attractions[city_match]
         
-        # 模糊匹配景点类型
-        filtered_attractions = filtered_attractions[filtered_attractions['景点类型'].str.contains(attraction_type)]
+        # 扩展类型映射：处理更多类型匹配
+        type_mapping = {
+            '风景区': ['风景区', '风景名胜'],
+            '风景名胜': ['风景区', '风景名胜'],
+            '公园': ['公园', '城市公园', '生态公园'],
+            '博物馆': ['博物馆', '博物院', '陈列馆', '纪念馆'],
+            '历史古迹': ['历史古迹', '古迹', '古建筑', '历史建筑', '遗址', '古迹遗址'],
+            '自然景观': ['自然景观', '自然', '山水', '湖泊', '河流', '森林', '山脉'],
+            '科教文化服务': ['博物馆', '博物院', '陈列馆', '纪念馆', '科教文化服务'],
+            '体育休闲服务': ['体育', '休闲', '运动', '体育休闲服务']
+        }
+        
+        # 获取要匹配的类型列表
+        target_types = type_mapping.get(attraction_type, [attraction_type])
+        
+        # 扩展匹配逻辑：不仅匹配景点类型字段，还匹配景点名称
+        type_condition = filtered_attractions['景点类型'].isin(target_types)
+        name_condition = filtered_attractions['景点名称'].str.contains('|'.join(target_types), case=False, na=False)
+        filtered_attractions = filtered_attractions[type_condition | name_condition]
+        
+        print(f"推荐服务类型匹配: attraction_type={attraction_type}, target_types={target_types}, city={city}, 匹配景点数量={len(filtered_attractions)}")
         
         # 应用额外筛选条件
         # 评分范围筛选
@@ -692,6 +720,8 @@ class RecommendationService:
         if seasons and len(seasons) > 0:
             filtered_attractions = filtered_attractions[filtered_attractions['最佳季节'].apply(lambda x: any(s in x for s in seasons))]
         
+        print(f"推荐服务最终筛选后景点数量: {len(filtered_attractions)}")
+        
         # 如果没有景点数据，返回空DataFrame
         if filtered_attractions.empty:
             return pd.DataFrame()
@@ -704,6 +734,12 @@ class RecommendationService:
             # 类型完全匹配加分
             if row['景点类型'] == attraction_type:
                 score += 10  # 完全匹配加10分
+            # 类型列表匹配加分
+            elif row['景点类型'] in target_types:
+                score += 8  # 列表匹配加8分
+            # 名称匹配加分
+            elif any(keyword in row['景点名称'] for keyword in target_types):
+                score += 6  # 名称匹配加6分
             
             # 免费景点加分
             if row['门票价格'] == 0:
@@ -722,6 +758,7 @@ class RecommendationService:
             recommendations = recommendations.copy()
             recommendations['简介截断'] = recommendations['简介'].apply(lambda x: x[:150] + '...' if len(x) > 150 else x)
         
+        print(f"推荐服务返回结果数量: {len(recommendations)}")
         return recommendations
     
     def get_city_attractions(self, city, top_n=10):

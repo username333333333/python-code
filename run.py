@@ -11,7 +11,7 @@ app = create_app()
 if __name__ == '__main__':
     # 获取环境变量中的配置
     debug = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
-    host = os.getenv('FLASK_HOST', '127.0.0.1')
+    host = os.getenv('FLASK_HOST', '0.0.0.0')  # 修改为0.0.0.0，允许同一WiFi下其他设备访问
     port = int(os.getenv('FLASK_PORT', '5000'))
     
     # 优化Flask配置，提高性能

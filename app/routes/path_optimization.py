@@ -77,12 +77,28 @@ def optimize_path():
             }
             serialized_itinerary.append(serialized_day)
         
-        # 只返回路径数据，不包含地图HTML，地图将由前端异步请求
-        return jsonify({
-            'success': True,
-            'itinerary': serialized_itinerary,
-            'budget': budget
-        })
+        # 检查行程是否为空
+        is_empty = True
+        for day_plan in serialized_itinerary:
+            if day_plan['attractions']:
+                is_empty = False
+                break
+        
+        if is_empty:
+            # 行程为空，返回明确的提示信息
+            return jsonify({
+                'success': False,
+                'message': '未找到符合您偏好的景点，请尝试调整景点类型偏好或扩大搜索范围',
+                'itinerary': [],
+                'budget': {}
+            })
+        else:
+            # 行程不为空，正常返回
+            return jsonify({
+                'success': True,
+                'itinerary': serialized_itinerary,
+                'budget': budget
+            })
     except Exception as e:
         return jsonify({
             'success': False,
@@ -125,9 +141,31 @@ def adjust_path_for_weather():
             # 获取景点对象
             attractions = []
             for attr_data in day_plan['attractions']:
-                attr = Attraction.query.get(attr_data['id'])
-                if attr:
-                    attractions.append(attr)
+                attr = None
+                # 首先尝试通过id查找（兼容数据库id）
+                if isinstance(attr_data['id'], int) or attr_data['id'].isdigit():
+                    attr = Attraction.query.get(int(attr_data['id']))
+                
+                # 如果通过id找不到，尝试通过城市和名称查找
+                if not attr and 'name' in attr_data and 'city' in attr_data:
+                    attr = Attraction.query.filter_by(
+                        name=attr_data['name'],
+                        city=attr_data['city']
+                    ).first()
+                
+                # 如果还是找不到，尝试从attr_data直接构建景点信息
+                if not attr:
+                    # 创建一个简单的景点对象，包含地图生成所需的基本信息
+                    attr = type('SimpleAttraction', (), {
+                        'name': attr_data.get('name', '未知景点'),
+                        'city': attr_data.get('city', '未知城市'),
+                        'type': attr_data.get('type', '未知类型'),
+                        'rating': float(attr_data.get('rating', 0.0)),
+                        'latitude': float(attr_data.get('latitude', 0.0)) if attr_data.get('latitude') else None,
+                        'longitude': float(attr_data.get('longitude', 0.0)) if attr_data.get('longitude') else None
+                    })()
+                
+                attractions.append(attr)
             
             db_itinerary.append({
                 'day': day_plan['day'],
@@ -203,9 +241,49 @@ def generate_map():
             # 获取景点对象
             attractions = []
             for attr_data in day_plan['attractions']:
-                attr = Attraction.query.get(attr_data['id'])
-                if attr:
-                    attractions.append(attr)
+                attr = None
+                
+                # 尝试通过id查找（兼容数据库id）
+                if isinstance(attr_data['id'], int) or attr_data['id'].isdigit():
+                    attr = Attraction.query.get(int(attr_data['id']))
+                
+                # 如果通过id找不到，尝试通过城市和名称查找
+                if not attr and 'name' in attr_data and 'city' in attr_data:
+                    attr = Attraction.query.filter_by(
+                        name=attr_data['name'],
+                        city=attr_data['city']
+                    ).first()
+                
+                # 如果还是找不到，尝试从attr_data直接构建景点信息
+                if not attr:
+                    # 从attr_data中提取经纬度，如果没有则使用默认值
+                    lat = attr_data.get('latitude')
+                    lon = attr_data.get('longitude')
+                    
+                    # 处理经纬度，确保是有效数字
+                    try:
+                        lat = float(lat) if lat not in [None, '', '，'] else None
+                    except (ValueError, TypeError):
+                        lat = None
+                    
+                    try:
+                        lon = float(lon) if lon not in [None, '', '，'] else None
+                    except (ValueError, TypeError):
+                        lon = None
+                    
+                    # 创建一个简单的景点对象，包含地图生成所需的基本信息
+                    attr = type('SimpleAttraction', (), {
+                        'name': attr_data.get('name', '未知景点'),
+                        'city': attr_data.get('city', '未知城市'),
+                        'type': attr_data.get('type', '未知类型'),
+                        'rating': float(attr_data.get('rating', 0.0)),
+                        'latitude': lat,
+                        'longitude': lon,
+                        'description': attr_data.get('description', ''),
+                        'price': float(attr_data.get('price', 0.0)) if attr_data.get('price') else 0.0
+                    })()
+                
+                attractions.append(attr)
             
             db_itinerary.append({
                 'day': day_plan['day'],

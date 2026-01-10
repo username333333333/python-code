@@ -375,7 +375,7 @@ def load_attractions_data(data_dir):
             column_mapping = {
                 '城市': '城市',
                 '景点名称': '景点名称',
-                '类型': '类型',
+                '类型': '景点类型',
                 '最佳季节': '最佳季节',
                 '评分': '评分',
                 '门票价格': '门票价格',
@@ -387,7 +387,11 @@ def load_attractions_data(data_dir):
             }
             
             # 只保留需要的列
-            df = df[[col for col in column_mapping.keys() if col in df.columns]]
+            existing_cols = [col for col in column_mapping.keys() if col in df.columns]
+            df = df[existing_cols]
+            
+            # 执行列重命名
+            df = df.rename(columns=column_mapping)
             
             all_attractions.append(df)
         except Exception as e:

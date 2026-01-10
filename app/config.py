@@ -19,7 +19,9 @@ class Config:
     # 检查是否有天气数据文件
     weather_data_files = list(DATA_DIR.glob('**/*天气数据.csv'))  # 递归查找所有子目录
     if not weather_data_files:
-        raise RuntimeError(f"数据目录中没有找到天气数据文件: {DATA_DIR}")
+        print(f"警告：数据目录中没有找到天气数据文件: {DATA_DIR}")
+        # 不再抛出异常，改为警告，允许应用继续运行
+        # raise RuntimeError(f"数据目录中没有找到天气数据文件: {DATA_DIR}")
     
     # 数据库配置 - SQLite
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or f'sqlite:///{BASE_DIR}/app.db'
