@@ -15,7 +15,6 @@ __pycache__/
 *.sqlite3
 instance/
 data/cache/
-data/poi/*.csv
 
 # Logs
 logs/
@@ -29,9 +28,6 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
-
-# Backup
-project_backup.zip
 
 # Testing
 .pytest_cache/
